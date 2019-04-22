@@ -1,0 +1,33 @@
+html
+    head
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    body
+      nav(class="navbar navbar-expand-lg navbar-dark bg-primary")
+        a(class="navbar-brand" href="#")
+        img(src="/images/tqa.jpg",width="30",height="30",alt="")
+        a(class="navbar-brand ml-2",href="/") Home
+        button(class="navbar-toggler",type="button",data-toggle="collapse",data-target="#navbarSupportedContent",aria-controls="navbarSupportedContent",aria-expanded="false",aria-label="Toggle navigation")
+            span(class="navbar-toggler-icon")
+        div(class="collapse navbar-collapse",id="navbarSupportedContent")
+            ul(class="navbar-nav mr-auto")
+                li(class="nav-item")
+                    a(class="nav-link",href="/users") Users
+                li(class="nav-item dropdown")
+                    a(class="nav-link dropdown-toggle",href="#",id="navbarDropdown",role="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false") Dropdown
+                    div(class="dropdown-menu",aria-labelledby="navbarDropdown")
+                        a(class="dropdown-item",href="#") Actiona
+                        a(class="dropdown-item",href="#") Another actiona
+                        div(class="dropdown-divider")
+                        a(class="dropdown-item",href="#") Something else herea
+                li(class="nav-item")
+                    a(class="nav-link",href="/users/create",tabindex="-1") Create User
+                li(class="nav-item")
+                    a(class="nav-link",href="/cart/add/") Cart
+                        span (
+                        span(id="cart-count")= count
+                        span )
+        if user
+            p= user.name
+    .container.pt-5
+        block content
+        

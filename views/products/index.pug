@@ -1,0 +1,30 @@
+extends ../layouts/common
+
+block content
+
+    h1 Products
+    .container
+        .row
+            each product in products
+                .col-sm-3
+                    .card
+                        img.card-img-top(src=product.image, alt='...')
+                        .card-body
+                            h5.card-title= product.name
+                            p.card-text= product.description
+                            a.btn.btn-primary(href='/cart/add/' + product.id) Add to cart
+        nav(aria-label='Page navigation example')
+            ul.pagination
+                li.page-item
+                a.page-link(href='/products?page=1', aria-label='Previous')
+                    span(aria-hidden='true') &laquo;
+                li.page-item
+                    a.page-link(href='/products?page=1') 1
+                    li.page-item
+                    a.page-link(href='/products?page=2') 2
+                    li.page-item
+                    a.page-link(href='/products?page=3') 3
+                    li.page-item
+                    a.page-link(href='products?page=4', aria-label='Next')
+                        span(aria-hidden='true') &raquo;
+                            

@@ -1,0 +1,15 @@
+extends ../layouts/common
+
+block content
+    h1 Login user
+    if errors
+        each error in errors
+            .alert.alert-danger= error
+        
+    
+    form(action="/auth/login",method="POST",class="form-group d-flex")
+        label Email
+        input(type="text", name="email",class="form-control",value = values ? values.email : '')
+        label Password
+        input(type="text", name="password",class="form-control",value = values ? values.password : '')
+        button(class="btn btn-primary ml-2  ") Login
