@@ -1,3 +1,4 @@
+var md5 = require('md5');
 var shortid = require('shortid');
 var db = require('../db');
 
@@ -8,9 +9,9 @@ module.exports.index = function(req,res){
 }
 
 module.exports.search = function(req,res){
-    var a = req.query.a;
+    var q = req.query.q;
     var searchname = db.get('users').value().filter(function(user){
-        return user.name.indexOf(a) !== -1;
+        return user.name.indexOf(q) !== -1;
     });
     res.render('users/index',{
         users:searchname
@@ -36,7 +37,7 @@ module.exports.createPost = function(req,res){
     if(!req.body.name){
         errors.push('Name is required')
     }
-    if(!req.body.phone){
+    if(!req.body.email){
         errors.push('Phone is required')
     }
 
@@ -47,6 +48,7 @@ module.exports.createPost = function(req,res){
         });
         return;
     }
+    req.body.password = md5(req.body.password);
     db.get('users').push(req.body).write();
-    res.redirect('/users')
+    res.redirect('/products')
 }

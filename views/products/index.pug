@@ -8,11 +8,12 @@ block content
             each product in products
                 .col-sm-3
                     .card
-                        img.card-img-top(src=product.image, alt='...')
+                        img.card-img-top(src=product.image, alt='...',style="width: 200;height: 230;padding-left: 40;")
                         .card-body
-                            h5.card-title= product.name
-                            p.card-text= product.description
-                            a.btn.btn-primary(href='/cart/add/' + product.id) Add to cart
+                            h5.card-title(style="font-weight:bold")= product.name
+                            p.card-text(style="color:red")= product.price
+                            a.btn.btn-primary(href='#') Chi tiết
+                            a.btn.btn-primary.ml-4(href='/cart/add/' + product.id) Add to cart
         nav(aria-label='Page navigation example')
             ul.pagination
                 li.page-item
@@ -27,4 +28,6 @@ block content
                     li.page-item
                     a.page-link(href='products?page=4', aria-label='Next')
                         span(aria-hidden='true') &raquo;
+    //- script(type="text/javascript",src="javascript/jquery-2.2.3.js")
+    //- script(type="text/javascript",src="javascript/minicart.min.js")
                             

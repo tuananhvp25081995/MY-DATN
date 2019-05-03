@@ -7,9 +7,9 @@ block content
             .alert.alert-danger= error
         
     
-    form(action="/auth/login",method="POST",class="form-group d-flex")
+    form(action="/auth/login",method="POST",class="form-group",style="font-weight:bold")
         label Email
-        input(type="text", name="email",class="form-control",value = values ? values.email : '')
+        input(type="text", name="email",class="form-control",style ="width: 500px",value = values ? values.email : '')
         label Password
-        input(type="text", name="password",class="form-control",value = values ? values.password : '')
-        button(class="btn btn-primary ml-2  ") Login
+        input(type="password", name="password",class="form-control",style ="width: 500px",value = values ? values.password : '')
+        button(class="btn btn-primary mt-4  ") Login

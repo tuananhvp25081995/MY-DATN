@@ -1,7 +1,7 @@
 extends ../layouts/common
 
 block content
-    h1 Create user
+    h1 Đăng kí User
     if errors
         each error in errors
             .alert.alert-danger= error
@@ -10,11 +10,17 @@ block content
     form(action="/users/create",method="POST",enctype="multipart/form-data")
         .form-group
             label(for="name") Name
-            input#name.form-control(type="text", name="name",value = values ? values.name : '')
+            input#name.form-control(type="text", name="name",style ="width: 500px",value = values ? values.name : '')
         .form-group
-            label(for="phone") Phone
-            input#phone.form-control(type="text", name="phone",value = values ? values.phone : '')
+            label(for="name") Email
+            input#name.form-control(type="text", name="email",style ="width: 500px",value = values ? values.email : '')
+        .form-group
+            label(for="password") Password
+            input#password.form-control(type="text", name="password",style ="width: 500px",value = values ? values.password : '')
+        .form-group
+            label(for="password") Confirm Password
+            input#password.form-control(type="text",style ="width: 500px")
         .form-group
             label(for="avatar") Avatar
             input#avatar.form-control-file(type="file", name="avatar")
-        button(class="btn btn-primary") Create
+        button(class="btn btn-primary") Sign Up
