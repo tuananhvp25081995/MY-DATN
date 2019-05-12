@@ -26,13 +26,6 @@ app.use(sessionMiddleware);
 
 app.use(express.static('public'));
 
-
-// app.get('/',function(req,res){
-//     res.render('index',{
-//         name: 'Nguyen Tuan Anh'
-//     });
-// });
-
 app.use('/users',userRouter);
 app.use('/auth',authRoute);
 app.use('/products',productRoute);

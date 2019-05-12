@@ -3,17 +3,18 @@ extends ../layouts/common
 block content
 
     h1 Products
-    .container
+    .container.pt-3
         .row
             each product in products
-                .col-sm-3
-                    .card
-                        img.card-img-top(src=product.image, alt='...',style="width: 200;height: 230;padding-left: 40;")
+                .col-sm-3.cart-grid
+                    .card.img
+                        img.card-img-top.wow.tada(src=product.image, alt='...')
                         .card-body
-                            h5.card-title(style="font-weight:bold")= product.name
-                            p.card-text(style="color:red")= product.price
-                            a.btn.btn-primary(href='#') Chi tiết
-                            a.btn.btn-primary.ml-4(href='/cart/add/' + product.id) Add to cart
+                            h5.card-title(style="font-weight:bold;font-size:15")= product.name
+                            p.card-text(style="color:red") #{product.price} VND
+                            .chitiet
+                                a.button.btn.btn-success(href='#') Chi tiết
+                                a.buttons.btn.btn-success(href='/cart/add/' + product.id) Add to cart
         nav(aria-label='Page navigation example')
             ul.pagination
                 li.page-item
@@ -28,6 +29,4 @@ block content
                     li.page-item
                     a.page-link(href='products?page=4', aria-label='Next')
                         span(aria-hidden='true') &raquo;
-    //- script(type="text/javascript",src="javascript/jquery-2.2.3.js")
-    //- script(type="text/javascript",src="javascript/minicart.min.js")
                             

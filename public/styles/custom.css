@@ -1,1 +1,65 @@
-/* Chao cac bo */
+.cart-grid:hover img {
+  -webkit-transform: translateY(0px) scale(0.8);
+  -moz-transform: translateY(0px) scale(0.8);
+  -ms-transform: translateY(0px) scale(0.8);
+  -o-transform: translateY(0px) scale(0.8);
+  transform: translateY(0px) scale(0.8);
+}
+
+.img img {
+  -webkit-transition: all 0.35s ease-in-out;
+  -moz-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+  width: 170;
+  height: 200;
+  padding-left: 40;
+  padding-top:20
+}
+
+#sidebar_left, #sidebar_right {
+	max-width:175px;
+}
+
+.chitiet .button{
+  flex-direction: column;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  right: 130px;
+  font-size: 11px;
+}
+
+.chitiet .buttons{
+  flex-direction: column;
+  display: flex;  
+  position: absolute;
+  bottom: 0;
+  left: 110px;
+  font-size: 11px;
+}
+
+.navbar-dark .navbar-nav .active> a:hover{
+  color:#BC1830
+}
+
+.navbar-dark .navbar-brand:hover{
+  color:#BC1830
+}
+
+.chitiet .buttons:hover{
+  background-color: red
+}
+
+.chitiet .button:hover{
+  background-color: red
+}
+
+a:hover{
+  color:#BC1830;
+  text-decoration: none
+}
+
+a{
+  text-decoration: none;
+  color:wheat;
+}

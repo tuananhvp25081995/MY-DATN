@@ -6,7 +6,6 @@ block content
         each error in errors
             .alert.alert-danger= error
         
-    
     form(action="/auth/login",method="POST",class="form-group",style="font-weight:bold")
         label(style="color: blue;font-weight:bold") Email
         input(type="text", name="email",class="form-control",style ="width: 500px",value = values ? values.email : '')
