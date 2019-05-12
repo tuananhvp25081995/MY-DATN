@@ -41,6 +41,29 @@ module.exports.search = async function(req,res){
   });
 }
 
+module.exports.viewCart = function(req, res){
+  var sessionId = req.signedCookies.sessionId;
+  var tong = 0;
+  var total = db.get('sessions').find({ id: sessionId }).value().cart;
+  var totals = Object.keys(total);
+  var count = sumSalaries(total);
+    Product.find({_id:totals})
+    .then(function(product){
+      for(var i = 0 ; i < product.length; i++){
+        var x = product[i].price * total[product[i].id]
+        tong += x
+      }
+      var tongPrice = tong 
+      res.render('products/cart',{
+        count: count,
+        tongPrice:tongPrice,
+        products: product,
+        amounts: total
+      });
+  });
+
+}
+
 function sumSalaries(salaries) {
 
   let sum = 0;
@@ -48,14 +71,4 @@ function sumSalaries(salaries) {
     sum += salary;
   }
   return sum;
-}
-
-module.exports.viewCart = async function(req, res){
-  var sessionId = req.signedCookies.sessionId;
-  var total = db.get('sessions').find({ id: sessionId }).value().cart;
-  var count = sumSalaries(total);
-  var products = await Product.find();
-    res.render('products/cart',{
-      count: count
-    });
 }

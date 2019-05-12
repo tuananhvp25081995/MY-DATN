@@ -8,8 +8,8 @@ block content
         
     
     form(action="/auth/login",method="POST",class="form-group",style="font-weight:bold")
-        label Email
+        label(style="color: blue;font-weight:bold") Email
         input(type="text", name="email",class="form-control",style ="width: 500px",value = values ? values.email : '')
-        label Password
+        label(style="color: blue;font-weight:bold") Password
         input(type="password", name="password",class="form-control",style ="width: 500px",value = values ? values.password : '')
-        button(class="btn btn-primary mt-4  ") Login
+        button(class="btn btn-primary mt-4 ") Login

@@ -10,50 +10,66 @@ html
 		script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
 		script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
 
-	body
-		nav.navbar.navbar-expand-lg.navbar-dark(style='background-color: #22993d;')
-			a.navbar-brand(href='/')
-				img(src='/images/logo.jpg', width='100', height='40', alt='')
-			a.navbar-brand(href='/',style="font-size:larger;font-weight:bold;") TRANG CHỦ
-			button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
-				span.navbar-toggler-icon
-			#navbarSupportedContent.collapse.navbar-collapse
-				ul.navbar-nav.mr-auto
-					li.nav-item.active
-						a.nav-link(href='#',style="font-size:large;font-weight:bold;") GIỚI THIỆU SẢN PHẨM
-							span.sr-only (current)
-					li.nav-item.active
-						a.nav-link(href='#',style="font-size:large;font-weight:bold;") CHIA SẺ NGƯỜI BỆNH
-					li.nav-item.active
-						a.nav-link(href='/products',style="font-size:large;font-weight:bold;") SẢN PHẨM
-					li.nav-item.dropdown.active
-						a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false',style="font-size:large;font-weight:bold;")
-							| CẨM NANG
-						.dropdown-menu(aria-labelledby='navbarDropdown',style="background-color: #22993d")
-							a.dropdown-item(href='#') Bệnh lý xuất huyết dạ dày
-							a.dropdown-item(href='#') Bệnh lý xuất huyết giảm tiểu cầu
-							a.dropdown-item(href='#') Ăn gì kiêng gì
-							a.dropdown-item(href='#') Tin tức sức khỏe
-							a.dropdown-item(href='#') Tư vấn sử dụng sản phẩm
-					li.nav-item.active
-						a.nav-link(href='#',style="font-size:large;font-weight:bold;") LIÊN HỆ
-					li.nav-item.active.d-flex
-						a.nav-link(href='#',style="font-size:large;font-weight:bold;")
-						i(class="fas fa-shopping-cart",style="padding-top: 12;margin-right: 10;")
-						span(style="color: white;padding-top: 8; margin-left: -4;") (
-						a(href="/products/view/cart",style="color: white;padding-top: 8; margin-left: -1;")= count
-						span(style="color: white;padding-top: 8; margin-left: 0;") )
-			.login.d-flex
-				a.nav-link(href='/users/create',style="font-size: 16;color: wheat;margin-right: -15;") Đăng kí
-			if userId
-				a.nav-link(href='/products',style="font-size: 16;color: wheat;") Đăng xuất
-			else
-				a.nav-link(href='http://localhost:3000/auth/login',style="font-size: 16;color: wheat;") Đăng nhập
-		.container(style="margin-right: 0;width: 360;padding-top: 10;")
-			form.form-inline.my-2.my-lg-0(action="/products/search",method="GET",class="d-flex")
-				input.form-control.mr-sm-2(type='text', placeholder='Search',name="q", aria-label='Search')
-				button.btn.btn-outline-success.my-2.my-sm-0(style="background-color: #3e4540") Search
-	.container.pt-5
-		block content
-			
-			
+	body(style='background-image: url("/images/fresh-green-leaves-wallpaper-850.jpg");background-repeat: no-repeat; background-position: center;background-size: cover; width: 100%;height: 100%;background-attachment: fixed;')
+		.container(style='background-color: white;')
+			nav.navbar.navbar-expand-lg.navbar-dark(style='background-color: #22993d;')
+				a.navbar-brand(href='/')
+					img(src='/images/logo.jpg', width='100', height='40', alt='')
+				a.navbar-brand(href='/',style="font-size:large;font-weight:bold;") TRANG CHỦ
+				button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+					span.navbar-toggler-icon
+				#navbarSupportedContent.collapse.navbar-collapse
+					ul.navbar-nav.mr-auto
+						li.nav-item.active
+							a.nav-link(href='#',style="font-size:small;font-weight:bold;") GIỚI THIỆU SẢN PHẨM
+								span.sr-only (current)
+						li.nav-item.active
+							a.nav-link(href='#',style="font-size:small;font-weight:bold;") CHIA SẺ NGƯỜI BỆNH
+						li.nav-item.active
+							a.nav-link(href='/products',style="font-size:small;font-weight:bold;") SẢN PHẨM
+						li.nav-item.dropdown.active
+							a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false',style="font-size:small;font-weight:bold;")
+								| CẨM NANG
+							.dropdown-menu(aria-labelledby='navbarDropdown',style="background-color: #22993d")
+								a.dropdown-item(href='#') Bệnh lý xuất huyết dạ dày
+								a.dropdown-item(href='#') Bệnh lý xuất huyết giảm tiểu cầu
+								a.dropdown-item(href='#') Ăn gì kiêng gì
+								a.dropdown-item(href='#') Tin tức sức khỏe
+								a.dropdown-item(href='#') Tư vấn sử dụng sản phẩm
+						li.nav-item.active
+							a.nav-link(href='#',style="font-size:small;font-weight:bold;") LIÊN HỆ
+						li.nav-item.active.d-flex
+							a.nav-link(href='#',style="font-size:small;font-weight:bold;")
+							i(class="fas fa-shopping-cart",style="padding-top: 12;margin-right: 10;") 
+							span(style="color: white;padding-top: 8; margin-left: -4;") (
+							a(href="/products/view/cart",style="color: white;padding-top: 8; margin-left: -1;")= count
+							span(style="color: white;padding-top: 8; margin-left: 0;") )
+				.login.d-flex
+					a.nav-link(href='/users/create',style="font-size: 16;color: wheat;margin-right: -15;") Đăng kí
+				if userId
+					a.nav-link(href='/auth/logout',style="font-size: 16;color: wheat;") Đăng xuất
+				else
+					a.nav-link(href='http://localhost:3000/auth/login',style="font-size: 16;color: wheat;") Đăng nhập
+			.container(style="margin-right: 0;width: 360;padding-top: 10;")
+				form.form-inline.my-2.my-lg-0(method="GET",class="d-flex")
+					input.form-control.mr-sm-2(type='text', placeholder='Search',name="q", aria-label='Search')
+					button.btn.btn-outline-success.my-2.my-sm-0(style="background-color: #3e4540") Search
+			block content
+			footer.page-footer.font-small.teal.pt-4(style='background-color: #009688!important;')
+				.container-fluid.text-center.text-md-left
+					.row
+						.col-md-6.mt-md-0.mt-3
+							h5.text-uppercase.font-weight-bold THỰC PHẨM CHỨC NĂNG BLOODWELL
+							p
+								span(style='color:#0000ff;') Thực phẩm chức năng Bloodwell
+								|  sản phẩm tinh túy từ thiên nhiên dành cho người bệnh xuất huyết giảm tiểu cầu - Chúng tôi là nhà phân phối độc quyền thực phẩm chức năng bloodwell tại Thành Phố Hồ Chí Minh mong muốn tạo một kênh đại lý trong Toàn Miền Nam và các tỉnh Miền Tây, miền Đông Nam Bộ để mang đến nhiều hơn nữa sản phẩm thiên nhiên cho những người bệnh chưa biết đến sản phẩm này. 
+						hr.clearfix.w-100.d-md-none.pb-3
+						.col-md-6.mb-md-0.mb-3
+							h5.text-uppercase.font-weight-bold LIÊN HỆ
+							p
+								span Bloodwell cho người bị xuất huyết giảm tiểu cầu
+							p(style='color:#bb192e;') Hotline: 0981574629 (Zalo)
+							p Địa chỉ: Hà Nội
+				.footer-copyright.text-center.py-3(style='background-color: #22993d;')
+					| &copy; Website made by 
+					a(href='https://www.facebook.com/tuananhdeptrai.95',style="color:#bc2564") Nguyen Tuan Anh

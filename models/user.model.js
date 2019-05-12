@@ -6,6 +6,8 @@ var userSchema = new mongoose.Schema({
   name: String,
   avatar: String,
   phone: String
+},{
+  versionKey:false
 });
 
 var User = mongoose.model('User', userSchema , 'users');

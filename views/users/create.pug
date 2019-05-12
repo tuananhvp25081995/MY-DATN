@@ -9,18 +9,18 @@ block content
     
     form(action="/users/create",method="POST",enctype="multipart/form-data")
         .form-group
-            label(for="name") Name
+            label(for="name",style="color: blue;font-weight:bold") Name
             input#name.form-control(type="text", name="name",style ="width: 500px",value = values ? values.name : '')
         .form-group
-            label(for="name") Email
+            label(for="name",style="color: blue;font-weight:bold") Email
             input#name.form-control(type="text", name="email",style ="width: 500px",value = values ? values.email : '')
         .form-group
-            label(for="password") Password
+            label(for="password",style="color: blue;font-weight:bold") Password
             input#password.form-control(type="text", name="password",style ="width: 500px",value = values ? values.password : '')
         .form-group
-            label(for="password") Confirm Password
+            label(for="password",style="color: blue;font-weight:bold") Confirm Password
             input#password.form-control(type="text",style ="width: 500px")
         .form-group
-            label(for="avatar") Avatar
+            label(for="avatar",style="color: blue;font-weight:bold") Avatar
             input#avatar.form-control-file(type="file", name="avatar")
         button(class="btn btn-primary") Sign Up

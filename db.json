@@ -1,26 +1,14 @@
 {
-  "users": [
-    {
-      "name": "Tuan Anh",
-      "email": "tuananh@gmail.com",
-      "password": "e10adc3949ba59abbe56e057f20f883e",
-      "id": "hE6UlnKFr",
-      "avatar": "uploads/87f1662dda5760aae44050997e6c9b45"
-    },
-    {
-      "name": "Admin",
-      "email": "admin@gmail.com",
-      "password": "21232f297a57a5a743894a0e4a801fc3",
-      "id": "GT5bwHR_X",
-      "avatar": "uploads/cd8a284ca0086b72377ee962e5738381"
-    }
-  ],
   "sessions": [
     {
-      "id": "R1nxXawGX",
+      "id": "xbWogYfJn",
       "cart": {
-        "5cc65b19ef24bac8972bed6f": 1,
-        "5ccbcaad3c86b9bba68e2fe6": 1
+        "5cc65b19ef24bac8972bed6f": 4,
+        "5ccbcaad3c86b9bba68e2fe6": 1,
+        "5ccbcabf3c86b9bba68e2ff6": 2,
+        "5ccbcac23c86b9bba68e2ffa": 1,
+        "5ccbd5753c86b9bba68e33ee": 1,
+        "5ccc06fa3c86b9bba68e45c1": 1
       }
     }
   ]

@@ -1,16 +1,19 @@
+var User = require('../models/user.model');
+
 var md5 = require('md5');
-var shortid = require('shortid');
 var db = require('../db');
 
-module.exports.index = function(req,res){
+module.exports.index = async function(req,res){
+    var users = await User.find();
     res.render('users/index',{
-        users: db.get('users').value()
+        users: users
     });
 }
 
-module.exports.search = function(req,res){
+module.exports.search = async function(req,res){
+    var users = await User.find();
     var q = req.query.q;
-    var searchname = db.get('users').value().filter(function(user){
+    var searchname = users.filter(function(user){
         return user.name.indexOf(q) !== -1;
     });
     res.render('users/index',{
@@ -22,23 +25,26 @@ module.exports.create = function(req,res){
     res.render('users/create');
 }
 
-module.exports.get = function(req,res){
+module.exports.get = async function(req,res){
     var id = req.params.id;
-    var user = db.get('users').find({id: id}).value();
-    res.render('users/view',{
-        user: user
+    var users = await User.find({_id:id});
+    users.forEach(function(user){
+        res.render('users/view',{
+            user: user
+        });
     });
 }
 
-module.exports.createPost = function(req,res){
-    req.body.id = shortid.generate();
+module.exports.createPost =  function(req,res){
     req.body.avatar = req.file.path.split('/').slice(1).join('/');
+    req.body.password = md5(req.body.password);
+    let users =  new User (req.body)
     var errors = [];
     if(!req.body.name){
         errors.push('Name is required')
     }
     if(!req.body.email){
-        errors.push('Phone is required')
+        errors.push('email is required')
     }
 
     if(errors.length){
@@ -48,7 +54,11 @@ module.exports.createPost = function(req,res){
         });
         return;
     }
-    req.body.password = md5(req.body.password);
-    db.get('users').push(req.body).write();
+    users.save((err,data) =>{
+        if(err){
+            res.send(err);
+        }
+        res.end(data);
+    });
     res.redirect('/products')
 }
