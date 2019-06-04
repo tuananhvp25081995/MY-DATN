@@ -28,23 +28,23 @@ html
 				#navbarSupportedContent.collapse.navbar-collapse
 					ul.navbar-nav.mr-auto
 						li.nav-item.active
-							a.nav-link(href='#',style="font-size:11;font-weight:bold;") GIỚI THIỆU SẢN PHẨM
+							a.nav-link(href='/gioi-thieu-san-pham',style="font-size:11;font-weight:bold;") GIỚI THIỆU SẢN PHẨM
 								span.sr-only (current)
 						li.nav-item.active
-							a.nav-link(href='#',style="font-size:11;font-weight:bold;") CHIA SẺ NGƯỜI BỆNH
+							a.nav-link(href='/chia-se-nguoi-benh',style="font-size:11;font-weight:bold;") CHIA SẺ NGƯỜI BỆNH
 						li.nav-item.active
 							a.nav-link(href='/products',style="font-size:11;font-weight:bold;") SẢN PHẨM
 						li.nav-item.dropdown.active
 							a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false',style="font-size:11;font-weight:bold;")
 								| CẨM NANG
 							.dropdown-menu(aria-labelledby='navbarDropdown',style="background-color: #22993d")
-								a.dropdown-item(href='#') Bệnh lý xuất huyết dạ dày
-								a.dropdown-item(href='#') Bệnh lý xuất huyết giảm tiểu cầu
-								a.dropdown-item(href='#') Ăn gì kiêng gì
-								a.dropdown-item(href='#') Tin tức sức khỏe
-								a.dropdown-item(href='#') Tư vấn sử dụng sản phẩm
+								a.dropdown-item(href='/cam-nang/benh-ly-xuat-huyet-da-day') Bệnh lý xuất huyết dạ dày
+								a.dropdown-item(href='/cam-nang/benh-ly-giam-tieu-cau') Bệnh lý xuất huyết giảm tiểu cầu
+								a.dropdown-item(href='/cam-nang/an-gi-kieng-gi') Ăn gì kiêng gì
+								a.dropdown-item(href='/cam-nang/tin-suc-khoe') Tin tức sức khỏe
+								a.dropdown-item(href='/cam-nang/tu-van-san-pham') Tư vấn sử dụng sản phẩm
 						li.nav-item.active
-							a.nav-link(href='#',style="font-size:11;font-weight:bold;") LIÊN HỆ
+							a.nav-link(href='/lien-he',style="font-size:11;font-weight:bold;") LIÊN HỆ
 						li.nav-item.active.d-flex
 							a.nav-link(href='#',style="font-size:small;font-weight:bold;")
 							i(class="fas fa-shopping-cart",style="padding-top: 7;margin-right: 10;") 
@@ -52,11 +52,12 @@ html
 							a(href="/products/view/cart",style="padding-top: 2; margin-left: -1;")= count
 							span(style="color: white;padding-top: 2; margin-left: 0;") )
 				.login.d-flex
+				if !userId
 					a(href='/users/create',style="font-size: 13;margin-right: 13;") Đăng kí
-				if userId
-					a(href='/auth/logout',style="font-size: 13;") Đăng xuất
-				else
 					a(href='http://localhost:3000/auth/login',style="font-size: 13;") Đăng nhập
+				else
+					a(style="font-size: 10;margin-right: 12;color:#9c3718")= user.name
+					a(href='auth/logout',style="font-size: 13;") Đăng xuất
 			.container(style="margin-right: 0;width: 360;padding-top: 10;")
 				form.form-inline.my-2.my-lg-0(action="/products/search",method="GET",class="d-flex")
 					input.form-control.mr-sm-2(type='text', placeholder='Search',name="q", aria-label='Search')

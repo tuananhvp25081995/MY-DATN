@@ -1,0 +1,53 @@
+extends ../layouts/common
+
+block content
+  .container.pt-5
+  .right_content
+  .mid_content.hide_right_sidebar
+    .ct-div-sub
+      div(style='margin-bottom:10px; font-size:15px;')
+        p(style='text-align: justify;')
+          font(color='#006400')
+            span(style='font-size: 20px;')
+              b Bloodwell cho ng&#x1B0;&#x1EDD;i b&#x1ECB; xu&#x1EA5;t huy&#x1EBF;t gi&#x1EA3;m ti&#x1EC3;u c&#x1EA7;u&nbsp;
+        p(style='text-align: justify;')
+          span(style='font-size:16px;')
+            strong
+              u &Dstrok;&#x1ECB;a ch&#x1EC9;
+            | :
+            em  83/521 Cổ Nhuế, Bắc Từ Liêm, Hà Nội
+            br
+            strong
+              u Hotline
+            | : 
+            span(style='color:#ff0000;')
+              strong  0981574629
+        p(style='text-align: justify;')
+          span(style='font-size:14px;')
+            strong
+              u &Dstrok;&#x1ECB;a ch&#x1EC9;
+              | :
+          | &nbsp; H&agrave; n&#x1ED9;i v&agrave; c&aacute;c t&#x1EC9;nh Qu&#x1EA3;ng Ninh, B&#x1EAF;c Giang , B&#x1EAF;c Ninh, Ph&uacute; Th&#x1ECD;, Cao B&#x1EB1;ng, B&#x1EAF;c C&#x1EA1;n, L&#x1EA1;ng S&#x1A1;n H&agrave; Giang , Tuy&ecirc;n Quang, Th&aacute;i Nguy&ecirc;n, , L&agrave;o Cai, Y&ecirc;n B&aacute;i, H&#x1EA3;i Ph&ograve;ng, H&#x1EA3;i D&#x1B0;&#x1A1;ng, H&#x1B0;ng Y&ecirc;n, Nam &Dstrok;&#x1ECB;nh, H&agrave; Nam, Th&aacute;i B&igrave;nh , Ninh B&igrave;nh, Thanh H&oacute;a, Ngh&#x1EC7; An, H&agrave; T&itilde;nh, Qu&#x1EA3;ng B&igrave;nh, Qu&#x1EA3;ng tr&#x1ECB;, Hu&#x1EBF;....
+        p(style='text-align: justify;')
+        form(style="width: 450;")
+          .form-group
+            label Họ tên
+            input#exampleInputName1.form-control(type='name', aria-describedby='nameHelp')
+          .form-group
+            label Điện thoại
+            input#exampleInputPhone1.form-control(type='phone')
+          .form-group
+            label Email
+            input#exampleInputEmail1.form-control(type='email', aria-describedby='emailHelp')
+            .form-group
+            label Tin nhắn của bạn
+            textarea#exampleInputMessage.form-control(type='phone',style="height: 180;")
+          .form-group
+            label Mã xác nhận
+            .d-flex
+              input#exampleInputMa.form-control(type='maxacnhan', aria-describedby='numberHelp',style="width: 200")
+              img(alt="Captcha",src="http://giamtieucau.com/CaptchaSecurityImages.php?width=100&height=28&characters=6")
+          .form-check
+          button.btn.btn-primary(type='submit') Gửi đi
+      .ct_map(style="margin-bottom:25px;margin-top:30px")
+        iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7838.383750234488!2d106.70789271688844!3d10.796611598052658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528a73a96a3e7%3A0x17ed31f781f60462!2sIM+Group!5e0!3m2!1svi!2s!4v1394681118967', width='930', height='500', frameborder='0', style='border:0')

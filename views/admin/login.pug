@@ -1,0 +1,35 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  meta(name='description', content='')
+  meta(name='author', content='')
+  title Quản lý - Login
+  link(href='/vendor/fontawesome-free/css/all.min.css', rel='stylesheet', type='text/css')
+  link(href='/css/sb-admin.css', rel='stylesheet')
+.container
+  .card.card-login.mx-auto.mt-5
+    .card-header Đăng nhập
+    .card-body
+      form
+        .form-group
+          .form-label-group
+            input#inputEmail.form-control(type='email', placeholder='Email address', required='required', autofocus='autofocus')
+            label(for='inputEmail') Email address
+        .form-group
+          .form-label-group
+            input#inputPassword.form-control(type='password', placeholder='Password', required='required')
+            label(for='inputPassword') Password
+        .form-group
+          .checkbox
+            label
+              input(type='checkbox', value='remember-me')
+              |                 Nhớ mật khẩu
+        a.btn.btn-primary.btn-block(href='/admin') Đăng nhập
+      .text-center
+        a.d-block.small.mt-3(href='/admin/register') Đăng kí tài khoản
+        a.d-block.small(href='/admin/forgot-password') Quên mật khẩu?
+script(src='/vendor/jquery/jquery.min.js')
+script(src='/vendor/bootstrap/js/bootstrap.bundle.min.js')
+script(src='/vendor/jquery-easing/jquery.easing.min.js')

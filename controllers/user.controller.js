@@ -28,6 +28,7 @@ module.exports.create = function(req,res){
 module.exports.get = async function(req,res){
     var id = req.params.id;
     var users = await User.find({_id:id});
+
     users.forEach(function(user){
         res.render('users/view',{
             user: user
@@ -61,4 +62,10 @@ module.exports.createPost =  function(req,res){
         res.end(data);
     });
     res.redirect('/products')
+}
+
+module.exports.user = async function(req, res, next){
+    var user = await User.find({_id: req.signedCookies.userId});
+    res.locals.user = user[0];
+    next();
 }

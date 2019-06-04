@@ -6,11 +6,11 @@ module.exports.requireAuth = async function(req,res,next){
         res.redirect('/auth/login');
         return;
     }
-    var user = await User.find({id: req.signedCookies.userId});
+    var user = await User.find({_id: req.signedCookies.userId});
     if(!user){
         res.redirect('/auth/login');
         return;
     }
-    res.locals.user = user;
+    res.locals.user = user[0];
     next();
 };

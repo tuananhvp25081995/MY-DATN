@@ -61,5 +61,8 @@ a:hover{
 
 a{
   text-decoration: none;
-  color:wheat;
+  color:#000000;
+}
+ul{
+  list-style: none;
 }

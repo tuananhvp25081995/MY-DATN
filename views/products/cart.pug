@@ -2,13 +2,13 @@ extends ../layouts/common
 
 block content
   .container.pt-5
-    a(href="#",style="margin-left: 840px;color: red;font-weight:bold") Thanh Toán
+    a(href="/thanh-toan",style="margin-left: 840px;font-weight:bold") Thanh Toán
     table.table(style="margin-top: 10px;")
       tr
         th(style="color: blue;") Image
-        th(style="color: blue;") Name
-        th(style="color: blue;") Quantity
-        th(style="color: blue;") price
+        th(style="color: blue;") Tên sản phẩm
+        th(style="color: blue;") Số lượng
+        th(style="color: blue;") Giá
       each product in products
         tr
           td

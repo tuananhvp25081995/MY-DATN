@@ -15,18 +15,35 @@ block content
                             .chitiet
                                 a.button.btn.btn-success(href='#') Chi tiết
                                 a.buttons.btn.btn-success(href='/cart/add/' + product.id) Add to cart
-        nav(aria-label='Page navigation example')
-            ul.pagination
-                li.page-item
-                a.page-link(href='/products?page=1', aria-label='Previous')
-                    span(aria-hidden='true') &laquo;
-                li.page-item
-                    a.page-link(href='/products?page=1') 1
-                    li.page-item
-                    a.page-link(href='/products?page=2') 2
-                    li.page-item
-                    a.page-link(href='/products?page=3') 3
-                    li.page-item
-                    a.page-link(href='products?page=4', aria-label='Next')
-                        span(aria-hidden='true') &raquo;
-                            
+    .container.pt-4
+        .row
+            if  (pages)
+                nav
+                    ul.pagination
+                        if  (current == 1)
+                            li.page-item.disabled
+                                a.page-link(href="#") First
+                        else
+                            li.page-item
+                                a.page-link(href="/products?page=1") First
+                        -   var i = (Number(current) > 3 ? Number(current) - 2 : 1)
+                        if  (i !== 1)
+                            a.page-link(href="#") ...
+                        -   for (; i <= (Number(current) + 3) && i <= pages; i++)
+                            if  (i == curent)
+                                li.page-item
+                                    a.page-link(href="" + i)
+                                        =i
+                            else
+                                li.page-item
+                                    a.page-link(href="/products?page=" + i)
+                                        =i
+                        if  (i == Number(current) + 3 && i < pages)
+                            li.page-item
+                                a.page-link(href="#") ...
+                        if  (current == pages)
+                            li.page-item.disabled
+                                a.page-link(href="#") Last
+                        else
+                            li.page-item
+                                a.page-link(href="/products?page="+ pages) Last
