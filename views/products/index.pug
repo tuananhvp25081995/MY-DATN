@@ -7,13 +7,13 @@ block content
         .row
             each product in products
                 .col-sm-3.cart-grid
-                    .card.img
+                    .card.img(style="height:329.1px")
                         img.card-img-top.wow.tada(src=product.image, alt='...')
                         .card-body
                             h5.card-title(style="font-weight:bold;font-size:15")= product.name
                             p.card-text(style="color:red") #{product.price} VND
                             .chitiet
-                                a.button.btn.btn-success(href='#') Chi tiết
+                                a.button.btn.btn-success(href='/chi-tiet/'+ product.id) Chi tiết
                                 a.buttons.btn.btn-success(href='/cart/add/' + product.id) Add to cart
     .container.pt-4
         .row

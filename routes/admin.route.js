@@ -14,6 +14,10 @@ router.get('/login',controller.login);
 
 router.get('/register',controller.register);
 
+router.get('/hoa-don',controller.hoadon);
+
 router.get('/tables',controller.tables);
+
+router.get('/paid-bill',controller.paidBill);
 
 module.exports = router;

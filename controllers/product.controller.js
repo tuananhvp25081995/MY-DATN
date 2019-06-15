@@ -1,5 +1,7 @@
 var Product = require('../models/product.model');
+var Hoadon = require('../models/hoadon.model');
 var db = require('../db');
+var url = require('url');
 module.exports.product = async function(req,res){
   var page = parseInt(req.query.page) || 1;
   var perPage = 8;
@@ -109,13 +111,47 @@ module.exports.count = async function(req, res, next){
   }
   var total = db.get('sessions').find({ id: sessionId }).value().cart;
   var count = sumSalaries(total); 
+  var userId = req.signedCookies.userId
   res.locals.count = count
+  res.locals.userId = userId
   next()
 };
 
 module.exports.viewProduct = function(req, res){
   res.render('products/gioithieusanpham')
 };
+
+module.exports.postViewCart = function(req, res){
+  var products = [];
+  var product = {};
+  var hoadon = new Hoadon (req.body);
+  var nameHoaDon = hoadon.name;
+  var idSP = hoadon.idSP;
+  var soLuongSP = hoadon.soluong;
+  // console.log(hoadon)
+  // for(var i = 0; i < nameHoaDon.length ; i++){
+  //   // var x = nameHoaDon[i];
+  //   // var y = idSP[i];
+  //   // var z = soLuongSP[i];
+
+  //   product.name = nameHoaDon[i];
+  //   product.id = idSP[i];
+  //   product.soluong = soLuongSP[i];
+
+  //   console.log(product)
+    
+  // }
+    // res.redirect('/products')
+    
+  // console.log(nameHoaDon, idSP, soLuongSP);
+  hoadon.save((err,data) =>{
+    if(err){
+        res.send(err);
+    }
+    res.end(data);
+  });
+  res.redirect('/products')
+}
 
 module.exports.shareInfomation = function(req, res){
   res.render('products/chiasenguoibenh',{
@@ -148,8 +184,31 @@ module.exports.camNang5 = function(req, res){
   res.render('products/tinsuckhoe')
 };
 
-module.exports.thanhToan = function(req, res){
-  res.render('products/thanhtoan')
+// module.exports.thanhToan = function(req, res){
+//   res.render('products/thanhtoan');
+// }
+
+// module.exports.thanhToanHoaDon = function(req, res){
+//   var hoadons = new Hoadon (req.body);
+//   console.log(hoadon)
+// //   hoadon.save((err,data) =>{
+// //     if(err){
+// //         res.send(err);
+// //     }
+// //     res.end(data);
+// // });
+// res.redirect('/products')
+// }
+
+module.exports.chitiet =async function(req, res){
+  var x = url.parse(req.url).path.split('/')
+  var pathname = x[2];
+  var products = await Product.find({ _id:  pathname});
+  var product =products[0];
+  res.render('products/chitiet',{
+    pathname:pathname,
+    product: product
+  })
 }
 
 function sumSalaries(salaries) {

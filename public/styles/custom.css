@@ -66,3 +66,156 @@ a{
 ul{
   list-style: none;
 }
+
+@media screen and (max-width: 980px) {
+	.mainbody .wrapper{
+		padding-top: 515px;
+	}
+	img {
+		height:auto !important;
+	}
+}
+
+	.ddsmoothmenu ul li a{
+		padding: 12px 6px !important;
+	}
+	 
+	.navi li a {
+		/* background:#ffffff;
+		color:#797979;		
+		border-left:3px solid #ffffff; 
+		border-top:1px solid #e0e0e0;*/
+		margin: 0 !important;
+	}
+	
+	/* .navi li a.active{
+		background: none !important;
+	} */
+	 
+	/*.navi li a:hover, .navi li:hover > a,.navi li a.active{
+	background:#f0f0f0 !important;
+	color:#797979 !important;
+	border-left:5px solid #9CA3DA !important;}*/
+	 
+	/*level 2 and 3 - make same width as all items*/
+	
+.pro_info_right {
+	float:right;
+	width:45%;
+	font-size:15px;
+	text-align:justify;
+}
+.pro_info_left {
+	float:left;
+	width:50%;
+}
+.pro_info_left img {
+	border:1px solid #ccc;
+}
+.product-infos {
+	margin:20px 0 10px;
+}
+.product-infos span {
+	display:inline-block;
+	width:150px;
+	font-weight:bold;
+}
+.product-infos span.price {
+	color:#f00;
+	font-size:16px;
+}
+.product-infos span.original_price {
+	color:#056BCD;
+	font-size:15px;
+	text-decoration:line-through;
+}
+.product-infos span.price, .gia-sp-ct {
+	color: #ff5900;
+}
+.post-content p, .news_content p, .description p {
+	line-height:24px;
+	padding-bottom:10px;
+}
+.product-detail .description ul, .news_content ul, .post-content ul{
+	list-style:inside;
+}
+.product-detail .description ol, .news_content ol, .post-content ol{
+	padding-left:18px;
+}
+.share-this-wrap, .tabwords {
+	margin-top:10px;
+	padding-top:10px;
+	border-top:1px dotted #ccc;
+	float:left;
+	width:100%;
+}
+.title-h3 {
+	width:95%;
+	background:url(../images/title-bg.png) left bottom repeat-x;
+	color:#404343;
+	font-size:15px;
+	font-weight:bold;
+	padding-left:10px;
+	height:35px;
+	line-height:25px;
+}
+.hide_right_sidebar .title-h3 {
+	width:98.5%;
+}
+.ct-div-sub img {
+	max-width:100%;
+	max-height:100%;
+}
+.ct-div-sub ul.list-sp li{
+  width: 47%;
+}
+.hide_right_sidebar .ct-div-sub ul.list-sp li{
+  width: 47%;
+}
+.fix-img{
+	height: 120px;
+	overflow: hidden;
+	position:relative;
+}
+.hide_right_sidebar .fix-img{
+	height:165px;
+}
+.img-thumb-ct {
+	display: block;
+	text-align: center;
+	height:100%;
+}
+.saleoff_icon {
+  background: url("../images/sale.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+  color: #f00;
+  font-size: 14px;
+  font-weight: bold;
+  height: 30px;
+  left: 0;
+  padding-top: 10px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 51px;
+}
+.gia-sp-ct {
+	color:#3b3a3a;
+	font-size:16px;
+	font-weight:bold;
+	margin:5px 0 10px 0;
+}
+.gia_goc_sp {
+	font-size:15px;
+	color:#323232 !important;
+	text-decoration:line-through;
+	font-weight:normal;
+}
+.ct-div-subs {
+	width: 93.20%;
+	float:left;
+	text-align:justify;
+}
+.chitiet-sp, .buy-btn, .mua-sp, .Paging ul li a, .pagination ul li a, .webForm input[type="submit"], .webForm input[type="button"]{
+	background:#22993D;
+    color: #ffffff;
+}

@@ -31,7 +31,7 @@ app.use(countUser.user)
 app.use(countProduct.count)
 app.use('/products',productRoute);
 app.use('/',productRoute);
-app.use('/users', authMiddleware.requireAuth,userRouter);
+app.use('/users',userRouter);
 app.use('/auth',authRoute);
 app.use('/cart', cartRoute);
 app.use('/api/products',apiProductRoute);

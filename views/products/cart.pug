@@ -2,19 +2,46 @@ extends ../layouts/common
 
 block content
   .container.pt-5
-    a(href="/thanh-toan",style="margin-left: 840px;font-weight:bold") Thanh Toán
-    table.table(style="margin-top: 10px;")
-      tr
-        th(style="color: blue;") Image
-        th(style="color: blue;") Tên sản phẩm
-        th(style="color: blue;") Số lượng
-        th(style="color: blue;") Giá
-      each product in products
+    form(action="/view/cart",method="POST",style="width: 450;margin-bottom:100px")
+      table.table(style="margin-top: 10px;")
         tr
-          td
-            img(src=product.image, alt="",width="32")
-          td=product.name
-          td=amounts[product.id]
-          td #{product.price} VND
-      tr
-        th(colspan="4",style="text-align:center;color: blue;") Tổng Giá: #{tongPrice} VND
+          th(style="color: blue;") Image
+          th(style="color: blue;") Tên sản phẩm
+          th(style="color: blue;") ID sản phẩm
+          th(style="color: blue;") Số lượng
+          th(style="color: blue;") Giá
+        each product in products
+          tr
+            td
+              input(style="border:none",type='image', name='image', src=product.image,width="32")
+            td
+              input(style="border:none",type='text', name='name[]', value=product.name)
+            td
+              input(style="border:none",type='text', name='idSP[]', value=product.id)
+            td
+              input(style="border:none",type='text', name='soluong', value=amounts[product.id])
+            td
+              input(style="border:none",type='text', name='price[]', value=product.price)
+        tr
+          th(colspan="4",style="text-align:center;color: blue;") Tổng Giá: 
+            input(style="border:none",type='text', name='tonggia', value=tongPrice)
+      p(style="color:red;font-weight:bold") *Để thanh toán vui lòng cung câp họ tên*
+      .form-group
+        label Họ tên
+        input#exampleInputName1.form-control(tyle="text",name='nameUser', aria-describedby='nameHelp')
+      .form-group
+        label Điện thoại
+        input#exampleInputPhone1.form-control(tyle="text",name='phone')
+      .form-group
+        label Địa chỉ
+        input#exampleInputEmail1.form-control(tyle="text",name='diachi', aria-describedby='emailHelp')
+        .form-group
+        label Lời nhắn
+        textarea#exampleInputMessage.form-control(tyle="text",name='message',style="height: 180;")
+      .form-group
+        label Mã xác nhận
+        .d-flex
+          input#exampleInputMa.form-control(tyle="text",name='maxacnhan', aria-describedby='numberHelp',style="width: 200")
+          img(alt="Captcha",src="http://giamtieucau.com/CaptchaSecurityImages.php?width=100&height=28&characters=6")
+      .form-check
+      button.btn.btn-primary(type='submit') Thanh toán

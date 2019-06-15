@@ -5,26 +5,22 @@ head
   meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
   meta(name='description', content='')
   meta(name='author', content='')
-  title Quản lý- products
-  // Custom fonts for this template
+  title Quản lý
   link(href='/vendor/fontawesome-free/css/all.min.css', rel='stylesheet', type='text/css')
-  // Page level plugin CSS
   link(href='/vendor/datatables/dataTables.bootstrap4.css', rel='stylesheet')
-  // Custom styles for this template
   link(href='/css/sb-admin.css', rel='stylesheet')
+  link(rel="stylesheet",type="text/css",href="/styles/admin.css")
 body(id="page-top")
   nav.navbar.navbar-expand.navbar-dark.bg-dark.static-top
     a.navbar-brand.mr-1(href='/admin') Giamtieucau
     button#sidebarToggle.btn.btn-link.btn-sm.text-white.order-1.order-sm-0(href='#')
       i.fas.fa-bars
-    // Navbar Search
     form.d-none.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0
       .input-group
         input.form-control(type='text', placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
         .input-group-append
           button.btn.btn-primary(type='button')
             i.fas.fa-search
-    // Navbar
     ul.navbar-nav.ml-auto.ml-md-0
       li.nav-item.dropdown.no-arrow.mx-1
         a#alertsDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
@@ -53,7 +49,7 @@ body(id="page-top")
           a.dropdown-item(href='#', data-toggle='modal', data-target='#logoutModal') Đăng xuất
   #wrapper
     ul.sidebar.navbar-nav
-      li.nav-item
+      li.nav-item.active
         a.nav-link(href='/admin')
           i.fas.fa-fw.fa-tachometer-alt
           span Danh mục
@@ -62,9 +58,10 @@ body(id="page-top")
           i.fas.fa-fw.fa-folder
           span Quản lý tài khoản
         .dropdown-menu(aria-labelledby='pagesDropdown')
-          a.dropdown-item(href='/admin/login') Login
-          a.dropdown-item(href='/admin/register') Register
-          a.dropdown-item(href='/admin/forgot-password') Forgot Password
+          h6.dropdown-header Login Screens:
+          a.dropdown-item(href='/admin/login') Đăng nhập
+          a.dropdown-item(href='/admin/register') Đăng kí
+          a.dropdown-item(href='/admin/forgot-password') Quên mật khẩu
           .dropdown-divider
           h6.dropdown-header Other Pages:
           a.dropdown-item(href='/admin/blank') Blank Page
@@ -73,10 +70,10 @@ body(id="page-top")
           i.fas.fa-fw.fa-chart-area
           span Biểu đồ
       li.nav-item
-        a.nav-link(href='/admin/hoa-don')
+        a.nav-link(href='/admin/charts')
           i.fas.fa-fw.fa-shopping-cart
           span Hóa đơn
-      li.nav-item.active
+      li.nav-item
         a.nav-link(href='/admin/tables')
           i.fas.fa-fw.fa-table
           span Sản phẩm
@@ -84,38 +81,81 @@ body(id="page-top")
       .container-fluid
         ol.breadcrumb
           li.breadcrumb-item
-            a(href='#') Danh mục
-          li.breadcrumb-item.active products
+          li.breadcrumb(style="font-size:30px;margin:0") Trang chủ
+        .row
+          .col-xl-4.col-sm-6.mb-3
+            .card.text-white.bg-primary.o-hidden.h-100
+              .card-body
+                .card-body-icon
+                  i.fas.fa-fw.fa-comments
+                .mr-5(style="font-size:30px") Sản phẩm: #{totalProduct}
+              a.card-footer.text-white.clearfix.small.z-1(href='#')
+                span.float-left Chi tiết
+                span.float-right
+                  i.fas.fa-angle-right
+          .col-xl-4.col-sm-6.mb-3
+            .card.text-white.bg-success.o-hidden.h-100
+              .card-body
+                .card-body-icon
+                  i.fas.fa-fw.fa-list
+                .mr-5(style="font-size:30px") Danh mục: 6
+              a.card-footer.text-white.clearfix.small.z-1(href='#')
+                span.float-left Chi tiết
+                span.float-right
+                  i.fas.fa-angle-right
+          .col-xl-4.col-sm-6.mb-3
+            .card.text-white.bg-warning.o-hidden.h-100
+              .card-body
+                .card-body-icon
+                  i.fas.fa-fw.fa-shopping-cart
+                .mr-5(style="font-size:30px") Hóa đơn:
+              a.card-footer.text-white.clearfix.small.z-1(href='#')
+                span.float-left Chi tiết
+                span.float-right
+                  i.fas.fa-angle-right
         .card.mb-3
           .card-header
-            i.fas.fa-table  Data Table Products
+            i.fas.fa-table  Products
+          .card-body
             .table-responsive
-              table#dataTable.table.table-bordered(width='100%', cellspacing='0')
-                thead
+            - for(var i = 0; i < hoadons.length; i++)
+              - var x = hoadons[i]
+              table#dataTable.table.table-bordered.pb-10(width='100%', cellspacing='0',style="border:4px solid black")
+                thead(style="background-color: #d0d24e;")
                   tr
-                    th(style="color: blue;") Name
-                    th(style="color: blue;") Image
-                    th(style="color: blue;") Mô tả
-                    th(style="color: blue;") Ngày thêm
+                    th(style="color: blue;") Tên Sản Phẩm
+                    th(style="color: blue;") ID Sản phẩm
+                    th(style="color: blue;") Số lượng
                     th(style="color: blue;") Giá
-                tfoot
-                  tr
-                    th(style="color: blue;") Name
-                    th(style="color: blue;") Image
-                    th(style="color: blue;") Mô tả
-                    th(style="color: blue;") Ngày thêm
-                    th(style="color: blue;") Giá
+
                 tbody
-                  each product in products
+                  - for(var a = 0; a < x.name.length; a++)
                     tr
-                      td=product.name
-                      td
-                        img(src=product.image, alt="",width="32")
-                      td=product.description
-                      td 2011/04/25
-                      td #{product.price} VND
+                      td=x.name[a]
+                      td=x.idSP[a]
+                      td=x.soluong[a]
+                      td=x.price[a]
+                  tr
+                    th(colspan="4",style="text-align:center;color: black;font-size:20px") Tổng giá đơn hàng: #{x.tonggia} VND
+                thead(style="background-color: #d0d24e;")
+                  tr
+                    th(style="color: blue;") Khách mua hàng
+                    th(style="color: blue;") Số điện thoại
+                    th(style="color: blue;") Địa chỉ
+                    th(style="color: blue;") Tin nhắn
+                tbody 
+                  tr
+                    td=x.nameUser
+                    td=x.phone
+                    td=x.diachi
+                    td=x.message
+                  tr
+                    th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
+                      a(href="/admin/paid-bill",style="color: #0e0505") Xác nhận đơn hàng
+              br
+              br
+              br
           .card-footer.small.text-muted Updated yesterday at 11:59 PM
-        p.small.text-center.text-muted.my-5
       footer.sticky-footer
         .container.my-auto
           .copyright.text-center.my-auto
@@ -136,7 +176,9 @@ body(id="page-top")
   script(src='/vendor/jquery/jquery.min.js')
   script(src='/vendor/bootstrap/js/bootstrap.bundle.min.js')
   script(src='/vendor/jquery-easing/jquery.easing.min.js')
+  script(src='/vendor/chart.js/Chart.min.js')
   script(src='/vendor/datatables/jquery.dataTables.js')
   script(src='/vendor/datatables/dataTables.bootstrap4.js')
   script(src='/js/sb-admin.min.js')
   script(src='/js/demo/datatables-demo.js')
+  script(src='/js/demo/chart-area-demo.js')

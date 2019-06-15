@@ -1,33 +1,33 @@
-extends ../layouts/common
+//- extends ../layouts/common
 
-block content
-  .container.pt-5
-  .right_content
-  .mid_content.hide_right_sidebar
-    .ct-div-sub
-      div(style='margin-bottom:10px; font-size:15px;')
-        p(style='text-align: justify;')
-          font(color='#006400')
-            span(style='font-size: 20px;')
-              b Để thanh toán vui lòng cập nhật thông tin
-        p(style='text-align: justify;')
-        form(style="width: 450;margin-bottom:100px")
-          .form-group
-            label Họ tên
-            input#exampleInputName1.form-control(type='name', aria-describedby='nameHelp')
-          .form-group
-            label Điện thoại
-            input#exampleInputPhone1.form-control(type='phone')
-          .form-group
-            label Địa chỉ
-            input#exampleInputEmail1.form-control(type='email', aria-describedby='emailHelp')
-            .form-group
-            label Lời nhắn
-            textarea#exampleInputMessage.form-control(type='phone',style="height: 180;")
-          .form-group
-            label Mã xác nhận
-            .d-flex
-              input#exampleInputMa.form-control(type='maxacnhan', aria-describedby='numberHelp',style="width: 200")
-              img(alt="Captcha",src="http://giamtieucau.com/CaptchaSecurityImages.php?width=100&height=28&characters=6")
-          .form-check
-          button.btn.btn-primary(type='submit') Thanh toán
+//- block content
+//-   .container.pt-5
+//-   .right_content
+//-   .mid_content.hide_right_sidebar
+//-     .ct-div-sub
+//-       div(style='margin-bottom:10px; font-size:15px;')
+//-         p(style='text-align: justify;')
+//-           font(color='#006400')
+//-             span(style='font-size: 20px;')
+//-               b Để thanh toán vui lòng cung cấp thông tin
+//-         p(style='text-align: justify;')
+//-         form(action="/thanh-toan",method="POST",style="width: 450;margin-bottom:100px")
+//-           .form-group
+//-             label Họ tên
+//-             input#exampleInputName1.form-control(tyle="text",name='nameUser', aria-describedby='nameHelp')
+//-           .form-group
+//-             label Điện thoại
+//-             input#exampleInputPhone1.form-control(tyle="text",name='phone')
+//-           .form-group
+//-             label Địa chỉ
+//-             input#exampleInputEmail1.form-control(tyle="text",name='diachi', aria-describedby='emailHelp')
+//-             .form-group
+//-             label Lời nhắn
+//-             textarea#exampleInputMessage.form-control(tyle="text",name='message',style="height: 180;")
+//-           .form-group
+//-             label Mã xác nhận
+//-             .d-flex
+//-               input#exampleInputMa.form-control(tyle="text",name='maxacnhan', aria-describedby='numberHelp',style="width: 200")
+//-               img(alt="Captcha",src="http://giamtieucau.com/CaptchaSecurityImages.php?width=100&height=28&characters=6")
+//-           .form-check
+//-           button.btn.btn-primary(type='submit') Thanh toán

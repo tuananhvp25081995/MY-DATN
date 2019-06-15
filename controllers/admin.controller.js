@@ -1,5 +1,5 @@
 var Product = require('../models/product.model');
-
+var Hoadon = require('../models/hoadon.model');
 
 module.exports.index = async function(req, res){
   Product
@@ -42,3 +42,17 @@ module.exports.tables = function(req, res){
     });
   });
 };
+
+module.exports.hoadon = async function(req, res){
+  var hoadons = await Hoadon.find({});
+  res.render('admin/hoadon',{
+    hoadons : hoadons
+  });
+}
+
+module.exports.paidBill = async function(req, res){
+  var hoadons = await Hoadon.find({});
+  res.render('admin/paidbill',{
+    hoadons : hoadons
+  });
+}
