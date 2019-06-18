@@ -7,12 +7,12 @@ block content
       .mid_content.hide_right_sidebar
         .container-sub-div.product-detail
           .pro_info_right
-            h1(style="color:red;font-size:16px;font-weight:bold") COMBO 5 TH&#x1EF0;C PH&#x1EA8;M CH&#x1EE8;C N&Abreve;NG BLOODWELL
-            p
+            h1(style="color:red;font-size:20px;font-weight:bold") #{product.name}
+            p(style="font-size:19px")
               | #{product.description}
           .pro_info_left
             a#this_map(href='/upload/images/combo-5-thuc-pham-chuc-nang-bloodwell.png')
-              img(style="width: 400;height: 520;",src=product.image, title='COMBO 5 THỰC PHẨM CHỨC NĂNG BLOODWELL', alt='COMBO 5 THỰC PHẨM CHỨC NĂNG BLOODWELL')
+              img(style="width: 400;height: 520;",src='/' + product.image, title='COMBO 5 THỰC PHẨM CHỨC NĂNG BLOODWELL', alt='COMBO 5 THỰC PHẨM CHỨC NĂNG BLOODWELL')
           p.cl(style="padding-top: 520;")
           ul.product-infos
             li
@@ -20,10 +20,10 @@ block content
               | #{product.name}
             li
               span Gi&aacute; g&#x1ED1;c:
-              span.original_price 1,750,000 vn&dstrok;
+              span.original_price #{pageInfo.calculatePrice(product.price)} vn&dstrok;
             li
               span Gi&aacute; b&aacute;n:
-              span.price #{product.price} vn&dstrok;
+              span.price #{pageInfo.calculatePrice(product.price)} vn&dstrok;
               a.buttons.btn.btn-success(href='/cart/add/'+ pathname) &Dstrok;&#x1EB7;t mua
           .description
             p(style='margin: 0px; padding: 0px 0px 10px; line-height: 24px; color: rgb(46, 46, 46); font-family: Tahoma, Geneva, sans-serif; font-size: 15px;')
@@ -64,7 +64,7 @@ block content
                   span(style='margin: 0px; padding: 0px; color: rgb(0, 0, 205);') &nbsp;xu&#x1EA5;t huy&#x1EBF;t gi&#x1EA3;m ti&#x1EC3;u c&#x1EA7;u
               | &nbsp;m&#x1EA1;n t&iacute;nh, ch&#x1EA3;y m&aacute;u cam, &dstrok;i ti&#x1EC3;u ra m&aacute;u, &dstrok;i ngo&agrave;i ra m&aacute;u, b&abreve;ng huy&#x1EBF;t, ch&#x1EA3;y m&aacute;u ch&acirc;n r&abreve;ng, xu&#x1EA5;t huy&#x1EBF;t ti&ecirc;u ho&aacute;.
             p(style='margin: 0px; padding: 0px 0px 10px; line-height: 24px; color: rgb(46, 46, 46); font-family: Tahoma, Geneva, sans-serif; font-size: 15px; text-align: center;')
-              img(alt='Thực Phẩm chức năng Bloodwell ', src=product.image, style='margin: 0px; padding: 0px; border: none; max-width: 100%; height: 300px; width: 220px;', title='Thực Phẩm chức năng Bloodwell ')
+              img(alt='Thực Phẩm chức năng Bloodwell ', src='/' + product.image, style='margin: 0px; padding: 0px; border: none; max-width: 100%; height: 300px; width: 220px;', title='Thực Phẩm chức năng Bloodwell ')
             p(style='margin: 0px; padding: 0px 0px 10px; line-height: 24px; color: rgb(46, 46, 46); font-family: Tahoma, Geneva, sans-serif; font-size: 15px; text-align: center;')
               span(style='margin: 0px; padding: 0px; color: rgb(0, 0, 205);')
                 em(style='margin: 0px; padding: 0px;')

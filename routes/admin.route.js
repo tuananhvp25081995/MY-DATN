@@ -1,8 +1,12 @@
 var express = require('express');
+var multer  = require('multer');
 var controller = require('../controllers/admin.controller');
+var adminMiddleware = require('../middlewares/admin.middleware');
 var router = express.Router();
+var upload = multer({ dest: './public/uploads/admins' });
+var uploads = multer({ dest: './public/uploads/products' });
 
-router.get('/',controller.index);
+router.get('/',adminMiddleware.requireAuth,controller.index);
 
 router.get('/blank',controller.blank);
 
@@ -12,12 +16,39 @@ router.get('/forgot-password',controller.forgotPassword);
 
 router.get('/login',controller.login);
 
+router.post('/login',controller.postLogin);
+
+router.get('/logout',controller.logOut);
+
 router.get('/register',controller.register);
+
+router.post('/register',
+upload.single('avatar'),
+controller.createPost
+);
 
 router.get('/hoa-don',controller.hoadon);
 
-router.get('/tables',controller.tables);
+router.get('/products',controller.tables);
 
-router.get('/paid-bill',controller.paidBill);
+router.get('/product/create',controller.create);
 
+router.post('/product/create',
+uploads.single('image'),
+controller.createProduct);
+
+router.get('/product/edit/:productId',controller.editProduct);
+
+router.get('/product/delete/:productId',controller.deleteProduct);
+
+router.post('/product/edit/:productId',
+uploads.single('image'),
+controller.editProducts);
+
+router.get('/paid-bill/:hoadonId',controller.paidBill);
+
+router.get('/paid-bill/',controller.paidBills);
+router.get('/users/',controller.user);
+router.get('/user/:id',controller.viewUser);
+router.get('/user/delete/:userId',controller.deleteUser);
 module.exports = router;

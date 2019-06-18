@@ -17,7 +17,7 @@ module.exports.postLogin = async function(req,res){
     var email = req.body.email;
     var user = await User.find({email: email});
     var users = user[0]
-    if(!user){
+    if(users === undefined){
         res.render('auth/login',{
             errors:[
                 'User does not exits'

@@ -3,28 +3,32 @@ extends ../layouts/common
 block content
   .container.pt-5
     form(action="/view/cart",method="POST",style="width: 450;margin-bottom:100px")
-      table.table(style="margin-top: 10px;")
-        tr
-          th(style="color: blue;") Image
-          th(style="color: blue;") Tên sản phẩm
-          th(style="color: blue;") ID sản phẩm
-          th(style="color: blue;") Số lượng
-          th(style="color: blue;") Giá
-        each product in products
+      .table-responsive(style="width:969.28px")
+        table.table(style="margin-top: 10px;")
           tr
-            td
-              input(style="border:none",type='image', name='image', src=product.image,width="32")
-            td
-              input(style="border:none",type='text', name='name[]', value=product.name)
-            td
-              input(style="border:none",type='text', name='idSP[]', value=product.id)
-            td
-              input(style="border:none",type='text', name='soluong', value=amounts[product.id])
-            td
-              input(style="border:none",type='text', name='price[]', value=product.price)
-        tr
-          th(colspan="4",style="text-align:center;color: blue;") Tổng Giá: 
-            input(style="border:none",type='text', name='tonggia', value=tongPrice)
+            th(style="color: blue;") Image
+            th(style="color: blue;") Tên sản phẩm
+            th(style="color: blue;") ID sản phẩm
+            th(style="color: blue;") Số lượng
+            th(style="color: blue;") Giá
+            th(style="color: blue;") Giá
+          each product in products
+            tr
+              td
+                input(style="border:none",type='image', name='image', src='/' + product.image,width="32")
+              td
+                input(style="border:none",type='text', name='name[]', value=product.name)
+              td
+                input(style="border:none",type='text', name='idSP[]', value=product.id)
+              td
+                input(style="border:none",type='text', name='soluong', value=amounts[product.id])
+              td
+                input(style="border:none",type='text', name='price[]', value=product.price)
+              td
+                a(href='/cart/remove/' + product.id) Xóa
+          tr
+            th(colspan="6",style="text-align:center;color: blue;") Tổng Giá: 
+              input(style="border:none",type='text', name='tonggia', value=tongPrice)
       p(style="color:red;font-weight:bold") *Để thanh toán vui lòng cung câp họ tên*
       .form-group
         label Họ tên

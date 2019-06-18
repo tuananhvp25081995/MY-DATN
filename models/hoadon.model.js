@@ -10,7 +10,8 @@ var hoadonSchema = new mongoose.Schema({
   diachi: String,
   soluong:[Number],
   idSP:[String],
-  price:[String]
+  price:[String],
+  status: { type: Number, default: 0 }
 });
 
 var Hoadon = mongoose.model('Hoadon', hoadonSchema , 'hoadon');

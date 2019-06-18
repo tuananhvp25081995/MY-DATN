@@ -1,0 +1,45 @@
+doctype html
+head
+meta(charset='utf-8')
+meta(http-equiv='X-UA-Compatible', content='IE=edge')
+meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+meta(name='description', content='')
+meta(name='author', content='')
+title Quản lý - Register
+link(href='/vendor/fontawesome-free/css/all.min.css', rel='stylesheet', type='text/css')
+link(href='/css/sb-admin.css', rel='stylesheet')
+.container
+.card.card-register.mx-auto.mt-5
+  .card-header Thêm sản phẩm mới
+  .card-body
+    form(action="/admin/product/create",method="POST",enctype="multipart/form-data")
+      .form-group
+        .form-label-group
+          input#inputName.form-control(type='text',name='name',placeholder='Name', required='required', autofocus='autofocus',value = values ? values.name : '')
+          label(for='inputName') Name
+      .form-group
+        .form-label-group
+          input#inputDescription.form-control(type='text',name='description', placeholder='Description', required='required',value = values ? values.description : '')
+          label(for='inputDescription') Description
+      .form-group
+        .form-label-group
+          input#inputCategory.form-control(type='text',name='category', placeholder='Thể loại', required='required',value = values ? values.description : '')
+          label(for='inputCategory') Thể loại
+      .form-group
+        .form-row
+          .col-md-6
+            .form-label-group
+              input#inputPrice.form-control(type='text',name='price', placeholder='Giá', required='required')
+              label(for='inputPrice') Giá
+          .col-md-6
+            .form-label-group
+              input#inputQuantity.form-control(type='text',name='quantity', placeholder='Số Lượng', required='required')
+              label(for='inputQuantity') Số Lượng
+      .form-group
+        .form-label-group
+          input#inputImage.form-control(type='file',name='image', placeholder='Image', required='required')
+          label(for='inputImage') Image
+      button.mt-3(class="btn btn-primary",style='width:200px;margin-left:200px;') Create
+script(src='/vendor/jquery/jquery.min.js')
+script(src='/vendor/bootstrap/js/bootstrap.bundle.min.js')
+script(src='/vendor/jquery-easing/jquery.easing.min.js')

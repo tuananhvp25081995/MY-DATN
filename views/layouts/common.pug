@@ -32,8 +32,14 @@ html
 								span.sr-only (current)
 						li.nav-item.active
 							a.nav-link(href='/chia-se-nguoi-benh-1',style="font-size:11;font-weight:bold;") CHIA SẺ NGƯỜI BỆNH
-						li.nav-item.active
-							a.nav-link(href='/products',style="font-size:11;font-weight:bold;") SẢN PHẨM
+						li.nav-item.dropdown.active
+							a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false',style="font-size:11;font-weight:bold;")
+								| SẢN PHẨM
+							.dropdown-menu(aria-labelledby='navbarDropdown',style="background-color: #22993d")
+								a.dropdown-item(href='/san-pham/dang-giam-gia') Đang giảm giá
+								a.dropdown-item(href='/san-pham/san-pham-moi') Sản phẩm mới
+								a.dropdown-item(href='/san-pham/combo-5-san-pham') Combo 5 sản phẩm
+								a.dropdown-item(href='/san-pham/san-pham-ban-chay') Sản phẩm bán chạy nhất
 						li.nav-item.dropdown.active
 							a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false',style="font-size:11;font-weight:bold;")
 								| CẨM NANG
@@ -77,10 +83,10 @@ html
 							p
 								span Bloodwell cho người bị xuất huyết giảm tiểu cầu
 							p(style='color:#bb192e;') Hotline: 0981574629 (Zalo)
-							p Địa chỉ: Hà Nội
+							p Địa chỉ: Công ty dược Linh Khuê P12A01, tầng 13, tòa Thăng Long Tower, 33 Mạc Thái Tổ
 				.footer-copyright.text-center.py-3(style='background-color: #22993d;')
-					| &copy; Website made by 
-					a(href='https://www.facebook.com/tuananhdeptrai.95',style="color:#bc2564") Nguyen Tuan Anh
+					| &copy; Website 
+					a(href='https://www.facebook.com/tuananhdeptrai.95',style="color:#bc2564") Giamtieucaulinhkhue
 		script(type="text/javascript",src="/javascript/sidebar.js")
 		script(type="text/javascript",src="/javascript/wow.js")
 		

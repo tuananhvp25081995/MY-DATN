@@ -12,21 +12,24 @@ head
   .card.card-login.mx-auto.mt-5
     .card-header Đăng nhập
     .card-body
-      form
+      if errors
+        each error in errors
+            .alert.alert-danger= error
+      form(action="/admin/login",method="POST")
         .form-group
           .form-label-group
-            input#inputEmail.form-control(type='email', placeholder='Email address', required='required', autofocus='autofocus')
+            input#inputEmail.form-control(type='email',name='email', placeholder='Email address', required='required', autofocus='autofocus',value = values ? values.email : '')
             label(for='inputEmail') Email address
         .form-group
           .form-label-group
-            input#inputPassword.form-control(type='password', placeholder='Password', required='required')
+            input#inputPassword.form-control(type='password',name='password', placeholder='Password', required='required',value = values ? values.password : '')
             label(for='inputPassword') Password
         .form-group
           .checkbox
             label
               input(type='checkbox', value='remember-me')
               |                 Nhớ mật khẩu
-        a.btn.btn-primary.btn-block(href='/admin') Đăng nhập
+        button(class="btn btn-primary mt-2",style="margin-left:80px;width:200px;") Đăng nhập
       .text-center
         a.d-block.small.mt-3(href='/admin/register') Đăng kí tài khoản
         a.d-block.small(href='/admin/forgot-password') Quên mật khẩu?

@@ -1,3 +1,11 @@
 th.xacnhan a:hover{
   background-color: #e0d6d6
 }
+
+.img2 {
+  width: 32px;
+  height: 32px;
+  border-radius:50%;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+}

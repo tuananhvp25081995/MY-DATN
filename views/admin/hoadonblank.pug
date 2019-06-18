@@ -1,0 +1,97 @@
+extends ../layouts/commons
+
+block content
+  #wrapper
+    ul.sidebar.navbar-nav
+      li.nav-item.active
+        a.nav-link(href='/admin')
+          i.fas.fa-fw.fa-tachometer-alt
+          span Danh mục
+      li.nav-item
+        a.nav-link(href='/admin/charts')
+          i.fas.fa-fw.fa-chart-area
+          span Biểu đồ
+      li.nav-item
+        a.nav-link(href='/admin/hoa-don')
+          i.fas.fa-fw.fa-shopping-cart
+          span Hóa đơn
+      li.nav-item
+        a.nav-link(href='/admin/paid-bill')
+          i.fas.fa-fw.fa-shopping-cart
+          span Hóa đơn đã thanh toán
+      li.nav-item
+        a.nav-link(href='/admin/products')
+          i.fas.fa-fw.fa-table
+          span Sản phẩm
+      li.nav-item.active
+        a.nav-link(href='/admin/users')
+          i.fas.fa-user
+          span Người dùng
+    #content-wrapper
+      .container-fluid
+        ol.breadcrumb
+          li.breadcrumb-item
+            a(href='#') Danh mục
+          li.breadcrumb-item.active hóa đơn
+        .row
+          .col-xl-4.col-sm-6.mb-3
+            .card.text-white.bg-primary.o-hidden.h-100
+              .card-body
+                .card-body-icon
+                  i.fas.fa-fw.fa-comments
+                .mr-5(style="font-size:30px") Sản phẩm: #{totalProduct}
+              a.card-footer.text-white.clearfix.small.z-1(href='#')
+                span.float-left Chi tiết
+                span.float-right
+                  i.fas.fa-angle-right
+          .col-xl-4.col-sm-6.mb-3
+            .card.text-white.bg-success.o-hidden.h-100
+              .card-body
+                .card-body-icon
+                  i.fas.fa-fw.fa-list
+                .mr-5(style="font-size:30px") Danh mục: 6
+              a.card-footer.text-white.clearfix.small.z-1(href='#')
+                span.float-left Chi tiết
+                span.float-right
+                  i.fas.fa-angle-right
+          .col-xl-4.col-sm-6.mb-3
+            .card.text-white.bg-warning.o-hidden.h-100
+              .card-body
+                .card-body-icon
+                  i.fas.fa-fw.fa-shopping-cart
+                .mr-5(style="font-size:30px") Hóa đơn: #{hoadon}
+              a.card-footer.text-white.clearfix.small.z-1(href='#')
+                span.float-left Chi tiết
+                span.float-right
+                  i.fas.fa-angle-right
+        .card.mb-3
+          .card-header
+            i.fas.fa-table  Products
+
+          .card-footer.small.text-muted Updated yesterday at 11:59 PM
+      footer.sticky-footer
+        .container.my-auto
+          .copyright.text-center.my-auto
+            span Website giamtieucaulinhkhue
+  a.scroll-to-top.rounded(href='#page-top')
+    i.fas.fa-angle-up
+  #logoutModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          h5#exampleModalLabel.modal-title Bạn có muốn đăng xuất?
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body Chọn &quot;Đăng xuất&quot; để đăng xuất
+        .modal-footer
+          button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
+          a.btn.btn-primary(href='/admin/login') Đăng xuất
+  script(src='/vendor/jquery/jquery.min.js')
+  script(src='/vendor/bootstrap/js/bootstrap.bundle.min.js')
+  script(src='/vendor/jquery-easing/jquery.easing.min.js')
+  script(src='/vendor/chart.js/Chart.min.js')
+  script(src='/vendor/datatables/jquery.dataTables.js')
+  script(src='/vendor/datatables/dataTables.bootstrap4.js')
+  script(src='/js/sb-admin.min.js')
+  script(src='/js/demo/datatables-demo.js')
+  script(src='/js/demo/chart-area-demo.js')

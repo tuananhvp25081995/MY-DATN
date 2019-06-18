@@ -5,7 +5,10 @@ var productSchema = new mongoose.Schema({
   name: String,
   image: String,
   price: Number,
-  updated: { type: Date, default: Date.now },
+  quantity: Number,
+  category: String,
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date},
 });
 
 var Product = mongoose.model('Product', productSchema , 'products');

@@ -10,9 +10,9 @@
   -webkit-transition: all 0.35s ease-in-out;
   -moz-transition: all 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
-  width: 170;
-  height: 200;
-  padding-left: 40;
+  width: 180;
+  height: 210;
+  padding-left: 33;
   padding-top:20
 }
 
@@ -218,4 +218,32 @@ ul{
 .chitiet-sp, .buy-btn, .mua-sp, .Paging ul li a, .pagination ul li a, .webForm input[type="submit"], .webForm input[type="button"]{
 	background:#22993D;
     color: #ffffff;
+}
+
+.card-body{
+	position: relative;
+}
+
+#price{
+	position: absolute;
+	bottom:37px;
+	left:50px
+}
+
+.saleoff_icon {
+	background: url("../images/sale.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	color: #f00;
+	font-size: 14px;
+	font-weight: bold;
+	height: 40px;
+	left: 0;
+	padding-top: 10px;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 51px;
+}
+
+table .table{
+	width:969.28px
 }
