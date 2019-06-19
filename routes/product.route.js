@@ -18,6 +18,10 @@ router.get('/cam-nang/an-gi-kieng-gi',controller.camNang3);
 router.get('/cam-nang/tin-suc-khoe',controller.camNang4);
 router.get('/cam-nang/tu-van-san-pham',controller.camNang5)
 router.get('/chi-tiet/:id',controller.chitiet);
+router.post('/chi-tiet/:id',controller.comments);
 router.get('/san-pham/dang-giam-gia',controller.giamGia);
+router.get('/san-pham/san-pham-moi',controller.sanPhamMoi);
+router.get('/san-pham/combo',controller.comBo);
+router.get('/san-pham/san-pham-ban-chay',controller.sanPhamBanChay);
 
 module.exports = router;

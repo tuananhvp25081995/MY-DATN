@@ -2,6 +2,7 @@ extends ../layouts/common
 
 block content
   .container.pt-5
+    p(style="color:#bd0000;font-weight:bold") Chúc mừng bạn đã được khuyến mãi #{sales}%
     form(action="/view/cart",method="POST",style="width: 450;margin-bottom:100px")
       .table-responsive(style="width:969.28px")
         table.table(style="margin-top: 10px;")
@@ -27,8 +28,9 @@ block content
               td
                 a(href='/cart/remove/' + product.id) Xóa
           tr
-            th(colspan="6",style="text-align:center;color: blue;") Tổng Giá: 
-              input(style="border:none",type='text', name='tonggia', value=tongPrice)
+            th(colspan="6",style="text-align:center;color: blue;") Tổng Giá:
+              if (dateNow >= startSale && dateNow <= endSale)
+                input(style="border:none",type='text', name='tonggia', value=tongPrice * (1-sales/100))
       p(style="color:red;font-weight:bold") *Để thanh toán vui lòng cung câp họ tên*
       .form-group
         label Họ tên

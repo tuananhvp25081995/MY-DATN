@@ -1,8 +1,11 @@
+var moment = require('moment');
+moment().format();
 var shortid = require('shortid');
 var User = require('../models/user.model');
 var Admin = require('../models/admin.model');
 var Product = require('../models/product.model');
 var Hoadon = require('../models/hoadon.model');
+var Saleoff = require('../models/saleoff.model');
 var db = require('../db');
 
 module.exports =async function (req, res, next) {
@@ -15,6 +18,21 @@ module.exports =async function (req, res, next) {
       id: sessionId
     }).write();
   }
+  var dateNow = new Date().getTime();
+  var saleoffs = await Saleoff.find({});
+  var startSales = saleoffs[0].startday
+  var status = saleoffs[0].status
+  var sales = saleoffs[0].sale
+  var endSales = saleoffs[0].endday
+  var dateSale = endSale - startSale;
+  var endSale = new Date(endSales).getTime();
+  var startSale = new Date(startSales).getTime()
+  res.locals.dateNow = dateNow;
+  res.locals.startSale = startSale;
+  res.locals.sales = sales;
+  res.locals.status = status;
+  res.locals.endSale = endSale;
+  res.locals.dateSale = dateSale;
   var user = await User.find({_id: req.signedCookies.userId});
   res.locals.user = user[0];
   var admin = await Admin.find({_id: req.signedCookies.adminId});

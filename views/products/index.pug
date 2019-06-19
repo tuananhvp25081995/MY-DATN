@@ -3,21 +3,28 @@ extends ../layouts/common
 block content
 
     h3(style="color:blue;font-weight:bold") Giảm Tiểu Cầu Linh Khuê
+    if (status === 0)
+        p#tit Giảm Giá Toàn Bộ Sản Phẩm 40% &nbsp
+             span#demo
     .container.pt-3
         .row
             each product in products
                 .col-sm-3.cart-grid
                     .card.img(style="height:390px")
-                        div.saleoff_icon -7%
+                        if (status === 0)
+                            div.saleoff_icon -#{sales} %
                         img.card-img-top.wow.tada(src='/' + product.image, alt='')
                         .card-body
                             h5.card-title(style="font-weight:bold;font-size:15")= product.name
                             div#price
-                                p.card-text(style="text-align:center;text-decoration: line-through;") #{pageInfo.calculatePrice(product.price)} vnđ
-                                p.card-text(style="color:red;font-weight:bold;") #{pageInfo.calculatePrice(product.price)} vnđ
+                                if (status === 0)
+                                    p.card-text(style="text-align:center;text-decoration: line-through;") #{pageInfo.calculatePrice(product.price)} vnđ
+                                    p.card-text(style="color:red;font-weight:bold;") #{pageInfo.calculatePrice(product.price * (1-sales/100))} vnđ
+                                else
+                                    p.card-text(style="color:red;font-weight:bold;") #{pageInfo.calculatePrice(product.price)} vnđ
                             .chitiet
                                 a.button.btn.btn-success(href='/chi-tiet/'+ product.id) Chi tiết
-                                a.buttons.btn.btn-success(href='/cart/add/' + product.id) Add to cart
+                                a.buttons.btn.btn-success(href='/cart/add/' + product.id) Đặt mua
     .container.pt-4
         .row
             if  (pages)
@@ -50,3 +57,4 @@ block content
                         else
                             li.page-item
                                 a.page-link(href="/products?page="+ pages) Last
+    script(src='/javascript/timesale.js', type='text/javascript')

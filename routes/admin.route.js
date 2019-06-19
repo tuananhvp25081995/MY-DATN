@@ -48,6 +48,13 @@ controller.editProducts);
 router.get('/paid-bill/:hoadonId',controller.paidBill);
 
 router.get('/paid-bill/',controller.paidBills);
+router.get('/sale/',controller.saleOff);
+router.get('/sale/create',controller.viewSaleOff);
+router.post('/sale/create',controller.createSaleOff);
+
+router.get('/sale/edit/:saleId',controller.editSale);
+router.post('/sale/edit/:saleId',controller.editSales);
+router.get('/sale/:saleId',controller.updateSale);
 router.get('/users/',controller.user);
 router.get('/user/:id',controller.viewUser);
 router.get('/user/delete/:userId',controller.deleteUser);

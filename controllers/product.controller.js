@@ -1,11 +1,12 @@
 var Product = require('../models/product.model');
 var Hoadon = require('../models/hoadon.model');
+var Comment = require('../models/comments.model');
 var calculatePrice = require('./priceproduct');
 var db = require('../db');
 var url = require('url');
 module.exports.product = async function(req,res){
   var page = parseInt(req.query.page) || 1;
-  var perPage = 12;
+  var perPage = 8;
   var sessionId = req.signedCookies.sessionId;
   var userId = req.signedCookies.userId
   if(db.get('sessions').find({ id: sessionId }).value() === undefined){
@@ -67,7 +68,7 @@ module.exports.product = async function(req,res){
         current: page,
         pages: Math.ceil(counts / perPage),
         count:count,
-        userId: userId
+        userId: userId,
       });
     });
   });
@@ -178,9 +179,11 @@ module.exports.camNang5 = function(req, res){
 };
 
 module.exports.chitiet =async function(req, res){
+  var userId = req.signedCookies.userId
   var x = url.parse(req.url).path.split('/')
   var pathname = x[2];
   var products = await Product.find({ _id:  pathname});
+  var comments = await Comment.find({});
   var product =products[0];
   let pageInfo = {};
   pageInfo.calculatePrice = calculatePrice;
@@ -188,7 +191,20 @@ module.exports.chitiet =async function(req, res){
     pathname:pathname,
     product: product,
     pageInfo,
+    comments,
   })
+}
+
+module.exports.comments = async function(req, res){
+  var id = req.params.id
+  var comment = new Comment (req.body);
+  comment.save((err,data) =>{
+    if(err){
+        res.send(err);
+    }
+    res.end(data);
+  });
+  res.redirect('/chi-tiet/'+id)
 }
 
 module.exports.giamGia = async function(req, res){
@@ -198,6 +214,51 @@ module.exports.giamGia = async function(req, res){
   res.render('products/index',{
     products,
     pageInfo
+  });
+}
+
+module.exports.sanPhamMoi = async function(req, res){
+  var userId = req.signedCookies.userId
+  var products = await Product.find();
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  var searchname = products.filter(function(product){
+    return product.category == "New";
+  });
+  res.render('products/index',{
+    products:searchname,
+    userId: userId,
+    pageInfo,
+  });
+}
+
+module.exports.comBo = async function(req, res){
+  var userId = req.signedCookies.userId
+  var products = await Product.find();
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  var searchname = products.filter(function(product){
+    return product.category == "Combo";
+  });
+  res.render('products/index',{
+    products:searchname,
+    userId: userId,
+    pageInfo,
+  });
+}
+
+module.exports.sanPhamBanChay = async function(req, res){
+  var userId = req.signedCookies.userId
+  var products = await Product.find();
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  var searchname = products.filter(function(product){
+    return product.category == "Bán chạy nhất";
+  });
+  res.render('products/index',{
+    products:searchname,
+    userId: userId,
+    pageInfo,
   });
 }
 

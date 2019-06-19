@@ -247,3 +247,19 @@ ul{
 table .table{
 	width:969.28px
 }
+
+#tit{
+	width: 900px;
+	height: 40px;
+	background-color: #090971;
+	text-align: center;
+	color: white;
+	padding-top: 7;
+	margin-left: 32;
+	font-size: 19px
+}
+
+#demo{
+    background-color: white;
+		color: red;
+}

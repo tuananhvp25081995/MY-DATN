@@ -68,10 +68,34 @@ block content
                 span.float-left Chi tiết
                 span.float-right
                   i.fas.fa-angle-right
+        a.btn.btn-primary.btn-block(href="/admin/sale/create",style="width: 200px;margin-bottom: 10px;") Insert new sale
         .card.mb-3
           .card-header
             i.fas.fa-table  Products
-
+          .card-body
+            .table-responsive
+              table#dataTable.table.table-bordered(width='100%', cellspacing='0')
+                thead
+                  tr
+                    th(style="color: blue;") Mã khuyến mãi
+                    th(style="color: blue;") Nội dung
+                    th(style="color: blue;") Khuyến mãi
+                    th(style="color: blue;") Ngày bắt đầu
+                    th(style="color: blue;") Ngày kết thúc
+                    th(style="color: blue;") Trạng thái
+                    th(style="color: blue;") Tùy chọn
+                tbody
+                  each saleoff in saleoffs
+                    tr
+                      td=saleoff.id
+                      td=saleoff.description
+                      td #{saleoff.sale} %
+                      td=saleoff.startday
+                      td=saleoff.endday
+                      td=saleoff.status
+                      td
+                        a(href="/admin/sale/" + saleoff.id).btn.btn-primary Chuyển trạng thái
+                        a.dropdown-item(href="/admin/sale/edit/" + saleoff.id).i.far.fa-edit
           .card-footer.small.text-muted Updated yesterday at 11:59 PM
       footer.sticky-footer
         .container.my-auto

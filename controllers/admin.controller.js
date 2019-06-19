@@ -2,6 +2,7 @@ var Product = require('../models/product.model');
 var Hoadon = require('../models/hoadon.model');
 var User = require('../models/user.model');
 var Admin = require('../models/admin.model');
+var Saleoff = require('../models/saleoff.model');
 var calculatePrice = require('./priceproduct');
 var md5 = require('md5');
 
@@ -181,6 +182,99 @@ module.exports.paidBills = async function(req, res){
     status: status,
     pageInfo,
   });
+}
+
+module.exports.saleOff = async function(req, res){
+  var dateNow = Date.now()
+  var saleoffs = await Saleoff.find({});
+  var startSale = saleoffs[0].startday
+  var endSale = saleoffs[0].endday
+  if(dateNow >= startSale && dateNow <= endSale){
+    
+  }
+  res.render('admin/saleoff',{
+    saleoffs,
+  })
+}
+
+module.exports.viewSaleOff = async function(req, res){
+  res.render('admin/createsale');
+}
+
+module.exports.createSaleOff = async function(req, res){
+  let sale =  new Saleoff (req.body)
+  var errors = [];
+  if(!req.body.description){
+      errors.push('Description is required')
+  }
+  if(!req.body.sale){
+      errors.push('Sale is required')
+  }
+  if(!req.body.startday){
+    errors.push('StartDay is required')
+  }
+  if(!req.body.endday){
+    errors.push('EndDay is required')
+  }
+
+  if(errors.length){
+      res.render('admin/sale/create',{
+          errors: errors,
+          values: req.body
+      });
+      return;
+  }
+  sale.save((err,data) =>{
+      if(err){
+          res.send(err);
+      }
+      res.end(data);
+  });
+  res.redirect('/admin/sale')
+}
+
+module.exports.editSale = async function(req, res){
+  var saleId = req.params.saleId
+  let sale =  await Saleoff.findById({_id:saleId})
+  res.render('admin/editsale',{
+    sale,
+  });
+}
+
+module.exports.editSales = async function(req, res){
+  var saleId = req.params.saleId
+  Saleoff.update({_id:saleId},{
+    description:req.body.description,
+    sale: req.body.sale,
+    startday: req.body.startday,
+    endday: req.body.endday,
+  }, function (err, docs) {
+      if(err){
+        console.log(err);
+      }
+    });
+  res.redirect('/admin/sale');
+}
+
+module.exports.updateSale = async function(req, res){
+  var saleId = req.params.saleId;
+  var sale = await Saleoff.findById({_id:saleId});
+  var num = sale.status
+  if(num === 0){
+    Saleoff.findOneAndUpdate({_id: saleId}, {$set:{status:1}}, {new: true}, (err, doc) => {
+      if (err) {
+          console.log("Something wrong when updating data!");
+      }
+    });
+  }
+  if(num === 1){
+    Saleoff.findOneAndUpdate({_id: saleId}, {$set:{status:0}}, {new: true}, (err, doc) => {
+      if (err) {
+          console.log("Something wrong when updating data!");
+      }
+    });
+  }
+  res.redirect('/admin/sale')
 }
 //Admin
 module.exports.login = async function(req, res){
