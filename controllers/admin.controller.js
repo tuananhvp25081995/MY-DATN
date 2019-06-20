@@ -2,6 +2,7 @@ var Product = require('../models/product.model');
 var Hoadon = require('../models/hoadon.model');
 var User = require('../models/user.model');
 var Admin = require('../models/admin.model');
+var Message = require('../models/messages.model');
 var Saleoff = require('../models/saleoff.model');
 var calculatePrice = require('./priceproduct');
 var md5 = require('md5');
@@ -315,6 +316,12 @@ module.exports.postLogin = async function(req,res){
   res.redirect('/admin');
 };
 
+module.exports.message = async function(req,res){
+  var messages = await Message.find({});
+  res.render('admin/message',{
+    messages,
+  });
+}
 
 module.exports.user = async function(req, res){
   var users = await User.find();

@@ -12,6 +12,7 @@ router.get('/chia-se-nguoi-benh-1',controller.shareInfomation);
 router.get('/chia-se-nguoi-benh-2',controller.shareInfomation);
 router.get('/chia-se-nguoi-benh-3',controller.shareInfomation);
 router.get('/lien-he',controller.contact);
+router.post('/lien-he',controller.postContact);
 router.get('/cam-nang/benh-ly-xuat-huyet-da-day',controller.camNang1)
 router.get('/cam-nang/benh-ly-giam-tieu-cau',controller.camNang2);
 router.get('/cam-nang/an-gi-kieng-gi',controller.camNang3);

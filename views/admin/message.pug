@@ -35,10 +35,29 @@ block content
       .container-fluid
         ol.breadcrumb
           li.breadcrumb-item
-          li.breadcrumb(style="font-size:30px;margin:0") Khách hàng
+          li.breadcrumb(style="font-size:30px;margin:0") Mesages
         .card.mb-3
           .card-header
-            i.fas.fa-user  #{user.name}            
+            i.fas.fa-table  Products
+          .card-body
+            .table-responsive
+              table#dataTable.table.table-bordered.pb-10(width='100%', cellspacing='0',style="border:4px solid black")
+                thead(style="background-color: #d0d24e;")
+                  tr
+                    th(style="color: blue;") Tên khách hàng
+                    th(style="color: blue;") Phone
+                    th(style="color: blue;") Email
+                    th(style="color: blue;") Message
+                    th(style="color: blue;") Created_at
+                tbody
+                  each message in messages
+                    tr
+                      td=message.name
+                      td=message.phone
+                      td=message.email
+                      td=message.message
+                      td=message.comments_at
+                br
       footer.sticky-footer
         .container.my-auto
           .copyright.text-center.my-auto

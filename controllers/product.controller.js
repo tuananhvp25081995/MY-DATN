@@ -1,6 +1,7 @@
 var Product = require('../models/product.model');
 var Hoadon = require('../models/hoadon.model');
 var Comment = require('../models/comments.model');
+var Message = require('../models/messages.model');
 var calculatePrice = require('./priceproduct');
 var db = require('../db');
 var url = require('url');
@@ -157,6 +158,17 @@ module.exports.shareInfomation = function(req, res){
 module.exports.contact = function(req, res){
   res.render('products/lienhe')
 };
+
+module.exports.postContact =async function(req,res){
+  var message = new Message (req.body);
+  message.save((err,data) =>{
+    if(err){
+        res.send(err);
+    }
+    res.end(data);
+  });
+  res.redirect('/');
+}
 
 module.exports.camNang1 = function(req, res){
   res.render('products/tinsuckhoe')
