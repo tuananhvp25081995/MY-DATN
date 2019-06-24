@@ -1,0 +1,4 @@
+{"_id":{"$oid":"5d092d0412b7ac1813d94c6c"},"description":"Chuc may man","sale":40,"makm":"1 ","quantity":20,"status":0,"startday":{"$date":"2019-06-18T18:27:16.564Z"},"__v":0,"endday":{"$date":"2019-06-22T10:06:51.505Z"}}
+{"_id":{"$oid":"5d0f48e40d7e475a7fc29d6c"},"status":1,"description":"Giảm giá mừng ngày hè","sale":10,"makm":2,"startday":{"$date":"2019-06-25T00:00:00.000Z"},"endday":{"$date":"2019-06-27T00:00:00.000Z"},"__v":0}
+{"_id":{"$oid":"5d0f4a1d0d7e475a7fc29d6d"},"status":1,"description":"Giảm giá mừng hè","sale":25,"makm":3,"startday":{"$date":"2019-06-25T00:00:00.000Z"},"endday":{"$date":"2019-06-27T00:00:00.000Z"},"__v":0}
+{"_id":{"$oid":"5d0f4a360d7e475a7fc29d6e"},"status":1,"description":"Giảm giá mừng ngày hè","sale":50,"makm":4,"startday":{"$date":"2019-06-25T00:00:00.000Z"},"endday":{"$date":"2019-06-27T00:00:00.000Z"},"__v":0}
