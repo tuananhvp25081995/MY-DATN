@@ -1,30 +1,67 @@
 extends ../layouts/common
 
 block content
-
     h3(style="color:blue;font-weight:bold") Giảm Tiểu Cầu Linh Khuê
     if (status === 0)
-        p#tit Giảm Giá Toàn Bộ Sản Phẩm 40% &nbsp
-             span#demo
-    .container.pt-3
+        p#tit Giảm Giá Toàn Bộ Sản Phẩm #{sales}% &nbsp
+            span#demo
+    .container.pt-5
         .row
             each product in products
                 .col-sm-3.cart-grid
                     .card.img(style="height:390px")
                         if (status === 0)
-                            div.saleoff_icon -#{sales} %
-                        img.card-img-top.wow.tada(src='/' + product.image, alt='')
-                        .card-body
-                            h5.card-title(style="font-weight:bold;font-size:15")= product.name
-                            div#price
-                                if (status === 0)
-                                    p.card-text(style="text-align:center;text-decoration: line-through;") #{pageInfo.calculatePrice(product.price)} vnđ
-                                    p.card-text(style="color:red;font-weight:bold;") #{pageInfo.calculatePrice(product.price * (1-sales/100))} vnđ
-                                else
+                            if (product.makm === 1)
+                                div.saleoff_icon -#{sales1} %
+                            if (product.makm === 1)
+                                img.card-img-top.wow.tada(src='/' + product.image, alt='')
+                                .card-body
+                                    h5.card-title(style="font-weight:bold;font-size:15")= product.name
+                                    div#price
+                                        p.card-text(style="text-align:center;text-decoration: line-through;") #{pageInfo.calculatePrice(product.price)} vnđ
+                                        p.card-text(style="color:red;font-weight:bold;") #{pageInfo.calculatePrice(product.price * (1-sales1/100))} vnđ
+                            if (product.makm === 2)
+                                div.saleoff_icon -#{sales2} %
+                            if (product.makm === 2)
+                                img.card-img-top.wow.tada(src='/' + product.image, alt='')
+                                .card-body
+                                    h5.card-title(style="font-weight:bold;font-size:15")= product.name
+                                    div#price
+                                        p.card-text(style="text-align:center;text-decoration: line-through;") #{pageInfo.calculatePrice(product.price)} vnđ
+                                        p.card-text(style="color:red;font-weight:bold;") #{pageInfo.calculatePrice(product.price * (1-sales2/100))} vnđ
+                            if (product.makm === 3)
+                                div.saleoff_icon -#{sales3} %
+                            if (product.makm === 3)
+                                img.card-img-top.wow.tada(src='/' + product.image, alt='')
+                                .card-body
+                                    h5.card-title(style="font-weight:bold;font-size:15")= product.name
+                                    div#price
+                                        p.card-text(style="text-align:center;text-decoration: line-through;") #{pageInfo.calculatePrice(product.price)} vnđ
+                                        p.card-text(style="color:red;font-weight:bold;") #{pageInfo.calculatePrice(product.price * (1-sales3/100))} vnđ
+                            if (product.makm === 4)
+                                div.saleoff_icon -#{sales4} %
+                            if (product.makm === 4)
+                                img.card-img-top.wow.tada(src='/' + product.image, alt='')
+                                .card-body
+                                    h5.card-title(style="font-weight:bold;font-size:15")= product.name
+                                    div#price
+                                        p.card-text(style="text-align:center;text-decoration: line-through;") #{pageInfo.calculatePrice(product.price)} vnđ
+                                        p.card-text(style="color:red;font-weight:bold;") #{pageInfo.calculatePrice(product.price * (1-sales4/100))} vnđ
+                            if (product.makm !== 4 && product.makm !== 3 && product.makm !== 2 && product.makm !== 1)
+                                img.card-img-top.wow.tada(src='/' + product.image, alt='')
+                                .card-body
+                                    h5.card-title(style="font-weight:bold;font-size:15")= product.name
+                                    div#price
+                                        p.card-text(style="color:red;font-weight:bold;") #{pageInfo.calculatePrice(product.price)} vnđ
+                        else 
+                            img.card-img-top.wow.tada(src='/' + product.image, alt='')
+                            .card-body
+                                h5.card-title(style="font-weight:bold;font-size:15")= product.name
+                                div#price
                                     p.card-text(style="color:red;font-weight:bold;") #{pageInfo.calculatePrice(product.price)} vnđ
-                            .chitiet
-                                a.button.btn.btn-success(href='/chi-tiet/'+ product.id) Chi tiết
-                                a.buttons.btn.btn-success(href='/cart/add/' + product.id) Đặt mua
+                        .chitiet
+                            a.button.btn.btn-success(href='/chi-tiet/'+ product.id) Chi tiết
+                            a.buttons.btn.btn-success(href='/cart/add/' + product.id) Đặt mua
     .container.pt-4
         .row
             if  (pages)

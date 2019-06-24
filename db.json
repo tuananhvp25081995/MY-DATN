@@ -1,29 +1,18 @@
 {
   "sessions": [
     {
-      "id": "AzgbHTFmJ",
+      "id": "d88sOtDm5",
       "cart": {
-        "5d07d0761ed1f93e060f2179": 1
+        "5d092d0412b7ac1813d94c6c": 1,
+        "5d0a86b60806fb75544ae66f": 1,
+        "5d092e3712b7ac1813d94c6d": 2
       }
     },
     {
-      "id": "A8ijBUr52"
-    },
-    {
-      "id": "_F1ZSRBQQ",
+      "id": "u8_fU_pEP",
       "cart": {
-        "5d092d0412b7ac1813d94c6c": 1
+        "5d092e3712b7ac1813d94c6d": 2
       }
-    },
-    {
-      "id": "yGHhYUis4",
-      "cart": {
-        "5d092e3712b7ac1813d94c6d": 1,
-        "5d092d0412b7ac1813d94c6c": 2
-      }
-    },
-    {
-      "id": "apf2W_rUk"
     }
   ]
 }

@@ -59,6 +59,97 @@ block content
                 canvas#myPieChart(width='100%', height='100')
               .card-footer.small.text-muted Updated yesterday at 11:59 PM
         p.small.text-center.text-muted.my-5
+      .clearfix(class='{{class}}')
+        .top-table.clearfix
+          .title-top-table(style='float:left;')
+            span(style='border-radius: 100%;width: 10px;height: 10px;background-color: blue;display: inline-block; ')
+            span(style='font-size: 20px; font-weight: bold;') Doanh s&#x1ED1; b&aacute;n h&agrave;ng
+          .menu-button(style='float:right;')
+            .btn-group.dropleft
+              button.test(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+              .dropdown-menu.dropdown-menu-right(style='padding: 0')
+                .options-menu
+                  button(data-toggle='modal', data-target='#myModal') T&ugrave;y ch&#x1ECD;n
+                .options-menu
+                  button(ng-click='exportData()') In b&aacute;o c&aacute;o
+        strong Th&#x1EDD;i gian
+        |  --
+        |         N&abreve;m
+        input(type='number', ng-model='yearBuy', width='60px',value=2018)
+        button.btn.btn-primary(ng-click='loadData()')  Xem 
+        #export
+          table.table
+            thead
+              tr
+                th(ng-show='id')
+                  | M&atilde; h&oacute;a &dstrok;&#x1A1;n
+                  .menu-button(style='float:right;')
+                    .btn-group.dropleft
+                      button.glyphicon.glyphicon-triangle-bottom(ng-class="{active : sortTable == 'id'}", ng-click='orderIdup()')
+                      button.glyphicon.glyphicon-triangle-top(ng-class="{active : sortTable == '-id'}", ng-click='orderIddown()')
+                th(ng-show='name')
+                  | T&ecirc;n kh&aacute;ch h&agrave;ng
+                  .menu-button(style='float:right;')
+                    .btn-group.dropleft
+                      button.glyphicon.glyphicon-triangle-bottom(ng-class="{active : sortTable == 'name'}", ng-click='orderNameup()')
+                      button.glyphicon.glyphicon-triangle-top(ng-class="{active : sortTable == '-name'}", ng-click='orderNamedown()')
+                th(ng-show='create')
+                  | Ng&agrave;y mua
+                  .menu-button(style='float:right;')
+                    .btn-group.dropleft
+                      button.glyphicon.glyphicon-triangle-bottom(ng-class="{active : sortTable == 'create'}", ng-click='orderCreateup()')
+                      button.glyphicon.glyphicon-triangle-top(ng-class="{active : sortTable == '-create'}", ng-click='orderCreatedown()')
+                th(ng-show='address')
+                  | &Dstrok;&#x1ECB;a ch&#x1EC9;
+                th(ng-show='detail')
+                  | Chi ti&#x1EBF;t
+            tbody
+              each hoadon in hoadons
+                tr(ng-repeat='order in listOrder | orderBy:sortTable ', ng-class-odd="'info'")
+                  td(ng-show='id') #{hoadon.id}
+                  td(ng-show='name') #{hoadon.nameUser}
+                  td(ng-show='create') #{hoadon.created_at}
+                  td(ng-show='address') #{hoadon.diachi}
+                  td(ng-show='detail') #{hoadon.message}
+        #myModal.modal.fade(role='dialog')
+          .modal-dialog
+            .modal-content
+              .modal-header
+                button.close(type='button', data-dismiss='modal') &times;
+                h4.modal-title Hi&#x1EC7;n th&#x1ECB; c&#x1ED9;t
+              .modal-body
+                form
+                  .form-check
+                    label
+                      input(type='checkbox', name='check', ng-model='allColumn', ng-click='showAll()')
+                      span.label-text  All
+                  hr
+                  .form-check
+                    label
+                      input(type='checkbox', name='check', ng-model='id', ng-click='checkFalse()')
+                      span.label-text  M&atilde; h&oacute;a &dstrok;&#x1A1;n
+                  hr
+                  .form-check
+                    label
+                      input(type='checkbox', name='check', ng-model='name', ng-click='checkFalse()')
+                      span.label-text  T&ecirc;n kh&aacute;ch h&agrave;ng 
+                  hr
+                  .form-check
+                    label
+                      input(type='checkbox', name='check', ng-model='create', ng-click='checkFalse()')
+                      span.label-text  Ng&agrave;y mua 
+                  hr
+                  .form-check
+                    label
+                      input(type='checkbox', name='check', ng-model='address', ng-click='checkFalse()')
+                      span.label-text  &Dstrok;&#x1ECB;a ch&#x1EC9;
+                  hr
+                  .form-check
+                    label
+                      input(type='checkbox', name='check', ng-model='detail', ng-click='checkFalse()')
+                      span.label-text Chi ti&#x1EBF;t
+              .modal-footer
+                button.btn.btn-success(type='button', data-dismiss='modal') OK
       footer.sticky-footer
         .container.my-auto
           .copyright.text-center.my-auto

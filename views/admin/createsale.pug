@@ -5,7 +5,7 @@ meta(http-equiv='X-UA-Compatible', content='IE=edge')
 meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
 meta(name='description', content='')
 meta(name='author', content='')
-title Quản lý - Register
+title Quản lý - Create Sale
 link(href='/vendor/fontawesome-free/css/all.min.css', rel='stylesheet', type='text/css')
 link(href='/css/sb-admin.css', rel='stylesheet')
 .container
@@ -21,6 +21,11 @@ link(href='/css/sb-admin.css', rel='stylesheet')
         .form-label-group
           input#inputSale.form-control(type='text',name='sale', placeholder='Sale', required='required',value = values ? values.sale : '')
           label(for='inputSale') Sale
+      .form-group
+        .form-label-group
+          input#inputMaKm.form-control(type='text',name='makm', placeholder='Mã khuyến mãi', required='required')
+          label(for='inputMaKm') Mã khuyến mãi
+      .form-group
       .form-group
         .form-row
           .col-md-6

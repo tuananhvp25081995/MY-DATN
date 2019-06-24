@@ -139,13 +139,14 @@ module.exports.viewProduct = function(req, res){
 
 module.exports.postViewCart = function(req, res){
   var hoadon = new Hoadon (req.body);
+  console.log(hoadon)
   hoadon.save((err,data) =>{
     if(err){
         res.send(err);
     }
     res.end(data);
   });
-  res.redirect('/products')
+  res.redirect('/')
 }
 
 module.exports.shareInfomation = function(req, res){

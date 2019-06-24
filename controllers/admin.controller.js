@@ -28,8 +28,14 @@ module.exports.blank = function(req, res){
   res.render('admin/blank');
 };
 
-module.exports.charts = function(req, res){
-  res.render('admin/charts');
+module.exports.charts = async function(req, res){
+  var hoadons = await Hoadon.find({"status": 1});
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
+  res.render('admin/charts',{
+    hoadons : hoadons,
+  });
 };
 
 module.exports.forgotPassword = function(req, res){
@@ -190,9 +196,6 @@ module.exports.saleOff = async function(req, res){
   var saleoffs = await Saleoff.find({});
   var startSale = saleoffs[0].startday
   var endSale = saleoffs[0].endday
-  if(dateNow >= startSale && dateNow <= endSale){
-    
-  }
   res.render('admin/saleoff',{
     saleoffs,
   })

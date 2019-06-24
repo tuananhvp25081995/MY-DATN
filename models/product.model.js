@@ -7,6 +7,7 @@ var productSchema = new mongoose.Schema({
   price: Number,
   quantity: Number,
   category: String,
+  makm: Number,
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date},
 });

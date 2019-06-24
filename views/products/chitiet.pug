@@ -132,6 +132,7 @@ block content
           font(color='#006400')
             span
               b &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Gửi bình luận của bạn
+              
         each comment in comments
           img.img2(src='/'+ user.avatar, alt="",width="32")
           span(style="font-weight:bold")   #{comment.message}

@@ -12,7 +12,7 @@ block content
             th(style="color: blue;") ID sản phẩm
             th(style="color: blue;") Số lượng
             th(style="color: blue;") Giá
-            th(style="color: blue;") Giá
+            th(style="color: blue;") Action
           each product in products
             tr
               td
@@ -23,14 +23,29 @@ block content
                 input(style="border:none",type='text', name='idSP[]', value=product.id)
               td
                 input(style="border:none",type='text', name='soluong', value=amounts[product.id])
-              td
-                input(style="border:none",type='text', name='price[]', value=product.price)
+              if (product.makm ===1)
+                td
+                  input(style="border:none",type='text', name='price[]', value=product.price * (1-sales1/100))
+              if (product.makm ===2)
+                td
+                  input(style="border:none",type='text', name='price[]', value=product.price * (1-sales2/100))
+              if (product.makm ===3)
+                td
+                  input(style="border:none",type='text', name='price[]', value=product.price * (1-sales3/100))
+              if (product.makm ===4)
+                td
+                  input(style="border:none",type='text', name='price[]', value=product.price * (1-sales4/100))
+              if (product.makm !==1 && product.makm !==2 && product.makm !==3 && product.makm !==4)
+                td
+                  input(style="border:none",type='text', name='price[]', value=product.price)
               td
                 a(href='/cart/remove/' + product.id) Xóa
           tr
             th(colspan="6",style="text-align:center;color: blue;") Tổng Giá:
-              if (dateNow >= startSale && dateNow <= endSale)
-                input(style="border:none",type='text', name='tonggia', value=tongPrice * (1-sales/100))
+              if (status === 0)
+                input(style="border:none",type='text', name='tonggia', value=tongPrice)
+              else
+                input(style="border:none",type='text', name='tonggia', value=tongPrice)
       p(style="color:red;font-weight:bold") *Để thanh toán vui lòng cung câp họ tên*
       .form-group
         label Họ tên
@@ -41,7 +56,7 @@ block content
       .form-group
         label Địa chỉ
         input#exampleInputEmail1.form-control(tyle="text",name='diachi', aria-describedby='emailHelp')
-        .form-group
+      .form-group
         label Lời nhắn
         textarea#exampleInputMessage.form-control(tyle="text",name='message',style="height: 180;")
       .form-group

@@ -8,9 +8,10 @@ var hoadonSchema = new mongoose.Schema({
   status: Number | 0,
   phone: String,
   diachi: String,
+  idSP : [String],
   soluong:[Number],
-  idSP:[String],
   price:[String],
+  created_at: { type: Date, default: Date.now },
   status: { type: Number, default: 0 }
 });
 
