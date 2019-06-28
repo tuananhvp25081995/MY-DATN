@@ -171,6 +171,20 @@ module.exports.hoadon = async function(req, res){
 
 module.exports.paidBill = async function(req, res){
   var hoadonId = req.params.hoadonId;
+  var products = await Product.find({});
+  var paidBills = await Hoadon.find({_id: hoadonId});
+  var idSP = paidBills[0].idSP;
+  var soluong = paidBills[0].soluong;
+  for(var i = 0; i < idSP.length; i++){
+    var products = await Product.find({_id:idSP[i]});
+    var quantity = products[0].quantity
+    var quantitys = soluong[i]
+    Product.findOneAndUpdate({_id:idSP[i]}, {$set:{quantity:quantity-quantitys}}, {new: true}, (err, doc) => {
+      if (err) {
+        console.log("Something wrong when updating data!");
+      }
+    });
+  }
   Hoadon.findOneAndUpdate({_id: hoadonId}, {$set:{status:1}}, {new: true}, (err, doc) => {
     if (err) {
         console.log("Something wrong when updating data!");
@@ -178,7 +192,6 @@ module.exports.paidBill = async function(req, res){
   });
   res.redirect('/admin/hoa-don')
 }
-
 module.exports.paidBills = async function(req, res){
   var hoadons = await Hoadon.find({"status": 1});
   let pageInfo = {};
