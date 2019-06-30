@@ -2,12 +2,14 @@ extends ../layouts/common
 
 block content
   .container.pt-5
-    p(style="color:#bd0000;font-weight:bold") Chúc mừng bạn đã được khuyến mãi #{sales}%
+    if(tongPrices >= 5000000)
+      p(style="color:#bd0000;font-weight:bold") Chúc mừng bạn đã được khuyến mãi 10% tổng số đơn hàng
     form(action="/view/cart",method="POST",style="width: 450;margin-bottom:100px")
       .table-responsive(style="width:969.28px")
         table.table(style="margin-top: 10px;")
           tr
             th(style="color: blue;") Image
+            th(style="color: blue;display:none") Image
             th(style="color: blue;") Tên sản phẩm
             th(style="color: blue;") ID sản phẩm
             th(style="color: blue;") Số lượng
@@ -16,7 +18,9 @@ block content
           each product in products
             tr
               td
-                input(style="border:none",type='image', name='image', src='/' + product.image,width="32")
+                input(style="border:none",type='image', name='images', src='/' + product.image,width="32")
+              td(style="display:none")
+                input(style="border:none",type='text', name='image[]', value=product.image)
               td
                 input(style="border:none",type='text', name='name[]', value=product.name)
               td
@@ -40,12 +44,21 @@ block content
                   input(style="border:none",type='text', name='price[]', value=product.price)
               td
                 a(href='/cart/remove/' + product.id) Xóa
+          tr(style="display:none") 
+            th(colspan="6",style="text-align:center;color: blue;") userID:
+              input(style="border:none",type='text', name='userid', value=user.id)
           tr
             th(colspan="6",style="text-align:center;color: blue;") Tổng Giá:
               if (status === 0)
-                input(style="border:none",type='text', name='tonggia', value=tongPrice)
+                if(tongPrices >= 5000000)
+                  input(style="border:none",type='text', name='tonggia', value=tongPrice * (1-10/100))
+                else
+                  input(style="border:none",type='text', name='tonggia', value=tongPrice)
               else
-                input(style="border:none",type='text', name='tonggia', value=tongPrice)
+                if(tongPrices >= 5000000)
+                  input(style="border:none",type='text', name='tonggia', value=tongPrice * (1-10/100))
+                else
+                  input(style="border:none",type='text', name='tonggia', value=tongPrice)
       p(style="color:red;font-weight:bold") *Để thanh toán vui lòng cung câp họ tên*
       .form-group
         label Họ tên

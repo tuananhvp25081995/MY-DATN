@@ -19,18 +19,48 @@ block content
               span Tên Sản Phẩm:
               | #{product.name}
             if (status === 0)
-              li
-                span Gi&aacute; g&#x1ED1;c:
-                span.original_price #{pageInfo.calculatePrice(product.price)} vn&dstrok;
-              li
-                span Gi&aacute; b&aacute;n:
-                span.price #{pageInfo.calculatePrice(product.price * (1-sales/100))} vn&dstrok;
-                a.buttons.btn.btn-success(href='/cart/add/'+ pathname) &Dstrok;&#x1EB7;t mua
+              if (product.makm === 1)
+                li
+                  span Gi&aacute; g&#x1ED1;c:
+                  span.original_price #{pageInfo.calculatePrice(product.price)} vn&dstrok;
+                li
+                  span Gi&aacute; b&aacute;n:
+                  span.price #{pageInfo.calculatePrice(product.price * (1-sales1/100))} vn&dstrok;
+                  if(product.quantity !== 0)
+                    a.buttons.btn.btn-success(href='/cart/add/'+ pathname) &Dstrok;&#x1EB7;t mua
+              if (product.makm === 2)
+                li
+                  span Gi&aacute; g&#x1ED1;c:
+                  span.original_price #{pageInfo.calculatePrice(product.price)} vn&dstrok;
+                li
+                  span Gi&aacute; b&aacute;n:
+                  span.price #{pageInfo.calculatePrice(product.price * (1-sales2/100))} vn&dstrok;
+                  if(product.quantity !== 0)
+                    a.buttons.btn.btn-success(href='/cart/add/'+ pathname) &Dstrok;&#x1EB7;t mua
+              if (product.makm === 3)
+                li
+                  span Gi&aacute; g&#x1ED1;c:
+                  span.original_price #{pageInfo.calculatePrice(product.price)} vn&dstrok;
+                li
+                  span Gi&aacute; b&aacute;n:
+                  span.price #{pageInfo.calculatePrice(product.price * (1-sales3/100))} vn&dstrok;
+                  if(product.quantity !== 0)
+                    a.buttons.btn.btn-success(href='/cart/add/'+ pathname) &Dstrok;&#x1EB7;t mua
+              if (product.makm === 4)
+                li
+                  span Gi&aacute; g&#x1ED1;c:
+                  span.original_price #{pageInfo.calculatePrice(product.price)} vn&dstrok;
+                li
+                  span Gi&aacute; b&aacute;n:
+                  span.price #{pageInfo.calculatePrice(product.price * (1-sales4/100))} vn&dstrok;
+                  if(product.quantity !== 0)
+                    a.buttons.btn.btn-success(href='/cart/add/'+ pathname) &Dstrok;&#x1EB7;t mua    
             else
               li
                 span Gi&aacute; b&aacute;n:
                 span.price #{pageInfo.calculatePrice(product.price)} vn&dstrok;
-                a.buttons.btn.btn-success(href='/cart/add/'+ pathname) &Dstrok;&#x1EB7;t mua
+                if(product.quantity !== 0)
+                  a.buttons.btn.btn-success(href='/cart/add/'+ pathname) &Dstrok;&#x1EB7;t mua
           .description
             p(style='margin: 0px; padding: 0px 0px 10px; line-height: 24px; color: rgb(46, 46, 46); font-family: Tahoma, Geneva, sans-serif; font-size: 15px;')
               em(style='margin: 0px; padding: 0px;')

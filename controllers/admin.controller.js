@@ -30,11 +30,63 @@ module.exports.blank = function(req, res){
 
 module.exports.charts = async function(req, res){
   var hoadons = await Hoadon.find({"status": 1});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  var imageHoaDonss = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.idSP)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    var r = Array.from(hoadon.image)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+    imageHoaDonss.push(r.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var anhHoaDon = imageHoaDonss.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var imageHoaDons = (anhHoaDon.split(","));
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          imageHoaDons[k] = imageHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        imageHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
   if(hoadons[0] === undefined){
     res.render('admin/hoadonblank')
   }
   res.render('admin/charts',{
     hoadons : hoadons,
+    idHoaDons:idHoaDons,
+    soluongHoaDons:soluongHoaDons,
+    priceHoaDons,
+    pageInfo,
+    ngaymuaHoadons:ngaymuaHoadons,
+    imageHoaDons:imageHoaDons,
   });
 };
 
@@ -179,12 +231,18 @@ module.exports.paidBill = async function(req, res){
     var products = await Product.find({_id:idSP[i]});
     var quantity = products[0].quantity
     var quantitys = soluong[i]
-    Product.findOneAndUpdate({_id:idSP[i]}, {$set:{quantity:quantity-quantitys}}, {new: true}, (err, doc) => {
-      if (err) {
-        console.log("Something wrong when updating data!");
-      }
-    });
+    if(quantity - quantitys >= 0){
+      Product.findOneAndUpdate({_id:idSP[i]}, {$set:{quantity:quantity-quantitys}}, {new: true}, (err, doc) => {
+        if (err) {
+          console.log("Something wrong when updating data!");
+        }
+      });
+    }
+    else{
+      console.log("het hang")
+    }
   }
+
   Hoadon.findOneAndUpdate({_id: hoadonId}, {$set:{status:1}}, {new: true}, (err, doc) => {
     if (err) {
         console.log("Something wrong when updating data!");
@@ -192,6 +250,7 @@ module.exports.paidBill = async function(req, res){
   });
   res.redirect('/admin/hoa-don')
 }
+
 module.exports.paidBills = async function(req, res){
   var hoadons = await Hoadon.find({"status": 1});
   let pageInfo = {};
@@ -358,13 +417,71 @@ module.exports.get = async function(req,res){
 }
 
 module.exports.viewUser = async function(req, res){
-    var id = req.params.id;
-    var users = await User.find({_id:id});
-    users.forEach(function(user){
-        res.render('admin/viewuser',{
-            user: user
-        });
-    });
+  var id = req.params.id;
+  var hoadons = await Hoadon.find({ $and:[{"status": 1},{userid:id}]});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  var imageHoaDonss = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.idSP)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    var r = Array.from(hoadon.image)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+    imageHoaDonss.push(r.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var anhHoaDon = imageHoaDonss.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var imageHoaDons = (anhHoaDon.split(","));
+  var tong = 0;
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  for(var y = 0 ; y < idHoaDons.length; y++){
+    var u = priceHoaDons[y] * soluongHoaDons[y]
+    tong += u
+  }
+  var tongPrice = tong
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  var users = await User.find({_id:id});
+  users.forEach(function(user){
+      res.render('admin/viewuser',{
+        user: user,
+        idHoaDons:idHoaDons,
+        soluongHoaDons:soluongHoaDons,
+        priceHoaDons,
+        pageInfo,
+        ngaymuaHoadons:ngaymuaHoadons,
+        tongPrice,
+        imageHoaDons:imageHoaDons,
+      });
+  });
 }
 
 module.exports.deleteUser = async function(req, res){

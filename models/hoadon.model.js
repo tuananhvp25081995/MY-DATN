@@ -10,6 +10,8 @@ var hoadonSchema = new mongoose.Schema({
   diachi: String,
   idSP : [String],
   soluong:[Number],
+  image: [String],
+  userid : String,
   price:[String],
   created_at: { type: Date, default: Date.now },
   status: { type: Number, default: 0 }

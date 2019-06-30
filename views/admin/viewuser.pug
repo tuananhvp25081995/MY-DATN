@@ -35,10 +35,29 @@ block content
       .container-fluid
         ol.breadcrumb
           li.breadcrumb-item
-          li.breadcrumb(style="font-size:30px;margin:0") Khách hàng
+          li.breadcrumb(style="font-size:30px;margin:0") User
         .card.mb-3
           .card-header
-            i.fas.fa-user  #{user.name}            
+            i.fas.fa-user  Sản phẩm khách hàng đã mua
+          .card-body
+            .table-responsive
+              table#dataTable.table.table-bordered(width='100%', cellspacing='0')
+                thead
+                  tr
+                    th(style="color: blue;") Image
+                    th(style="color: blue;") ID Sản phẩm
+                    th(style="color: blue;") Số lượng
+                    th(style="color: blue;") Ngày mua
+                    th(style="color: blue;") Giá
+                tbody
+                  - for(var i = 0; i < idHoaDons.length; i++)
+                    tr
+                      td
+                        img(src='/' + imageHoaDons[i], alt="",width="56",height="90")
+                      td #{idHoaDons[i]}
+                      td #{soluongHoaDons[i]}
+                      td #{ngaymuaHoadons[i]}
+                      td #{priceHoaDons[i]}
       footer.sticky-footer
         .container.my-auto
           .copyright.text-center.my-auto

@@ -102,10 +102,21 @@ module.exports.viewCart = function(req, res){
     Product.find({_id:totals})
     .then(function(product){
       for(var i = 0 ; i < product.length; i++){
-        var x = product[i].price * total[product[i].id]
+        if(product[i].makm === 1){
+          var x = product[i].price * total[product[i].id] * 0.6
+        }
+        if(product[i].makm === 2){
+          var x = product[i].price * total[product[i].id] * 0.9
+        }
+        if(product[i].makm === 3){
+          var x = product[i].price * total[product[i].id] * 0.75
+        }
+        if(product[i].makm === 4){
+          var x = product[i].price * total[product[i].id] * 0.5
+        }
         tong += x
       }
-      var tongPrice = tong 
+      var tongPrice = tong
       res.render('products/cart',{
         count: count,
         tongPrice:tongPrice,
@@ -139,7 +150,6 @@ module.exports.viewProduct = function(req, res){
 
 module.exports.postViewCart = function(req, res){
   var hoadon = new Hoadon (req.body);
-  console.log(hoadon)
   hoadon.save((err,data) =>{
     if(err){
         res.send(err);
