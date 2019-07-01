@@ -79,7 +79,7 @@ block content
                       td #{idHoaDons[i]}
                       td #{ngaymuaHoadons[i]}
                       td #{soluongHoaDons[i]}
-                      td #{priceHoaDons[i]}            
+                      td #{pageInfo.calculatePrice(priceHoaDons[i])}            
               .card-footer.small.text-muted Updated yesterday at 11:59 PM
       footer.sticky-footer
         .container.my-auto

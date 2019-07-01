@@ -225,6 +225,7 @@ module.exports.paidBill = async function(req, res){
   var hoadonId = req.params.hoadonId;
   var products = await Product.find({});
   var paidBills = await Hoadon.find({_id: hoadonId});
+  var idUser = paidBills[0].userid
   var idSP = paidBills[0].idSP;
   var soluong = paidBills[0].soluong;
   for(var i = 0; i < idSP.length; i++){
@@ -243,11 +244,62 @@ module.exports.paidBill = async function(req, res){
     }
   }
 
+  // update user
   Hoadon.findOneAndUpdate({_id: hoadonId}, {$set:{status:1}}, {new: true}, (err, doc) => {
     if (err) {
         console.log("Something wrong when updating data!");
     }
   });
+
+  var hoadons = await Hoadon.find({ $and:[{"status": 1},{userid:idUser}]});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.idSP)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+        }
+        idHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  for(var y = 0 ; y < idHoaDons.length; y++){
+    var tong = 0;
+    var u = priceHoaDons[y] * soluongHoaDons[y]
+    tong += u
+  }
+  var tongPrice = tong
+  console.log(tongPrice)
+
+  User.findOneAndUpdate({_id:idUser}, {$set:{tongsotien:tongPrice}}, {new: true}, (err, doc) => {
+    if (err) {
+      console.log("Something wrong when updating data!");
+    }
+  })
+
   res.redirect('/admin/hoa-don')
 }
 
@@ -255,6 +307,9 @@ module.exports.paidBills = async function(req, res){
   var hoadons = await Hoadon.find({"status": 1});
   let pageInfo = {};
   pageInfo.calculatePrice = calculatePrice;
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
   var status = hoadons[0].status
   res.render('admin/paidbill',{
     hoadons : hoadons,
@@ -399,9 +454,12 @@ module.exports.message = async function(req,res){
 }
 
 module.exports.user = async function(req, res){
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
   var users = await User.find();
   res.render('admin/users',{
-      users: users
+    users: users,
+    pageInfo,
   });
 };
 

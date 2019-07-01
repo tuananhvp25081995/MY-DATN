@@ -76,7 +76,7 @@ block content
               table#dataTable.table.table-bordered(width='100%', cellspacing='0')
                 thead
                   tr
-                    th(style="color: blue;") Name
+                    th(style="color: blue;") ID Sản phẩm
                     th(style="color: blue;") Image
                     th(style="color: blue;") Mô tả
                     th(style="color: blue;") Ngày thêm
@@ -87,7 +87,7 @@ block content
                     th(style="color: blue;") Action
                 tfoot
                   tr
-                    th(style="color: blue;") Name
+                    th(style="color: blue;") ID Sản phẩm
                     th(style="color: blue;") Image
                     th(style="color: blue;") Mô tả
                     th(style="color: blue;") Ngày thêm
@@ -99,7 +99,7 @@ block content
                 tbody
                   each product in products
                     tr
-                      td=product.name
+                      td=product.id
                       td
                         img(src='/' + product.image, alt="",width="56",height="90")
                       td=product.description

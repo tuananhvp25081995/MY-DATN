@@ -4,6 +4,8 @@ block content
   .container.pt-5
     if(tongPrices >= 5000000)
       p(style="color:#bd0000;font-weight:bold") Chúc mừng bạn đã được khuyến mãi 10% tổng số đơn hàng
+    else
+      p
     form(action="/view/cart",method="POST",style="width: 450;margin-bottom:100px")
       .table-responsive(style="width:969.28px")
         table.table(style="margin-top: 10px;")
