@@ -69,6 +69,10 @@ block content
                                     h5.card-title(style="font-weight:bold;font-size:15")= product.name
                                     div#price
                                         p.card-text(style="color:red;font-weight:bold;") #{pageInfo.calculatePrice(product.price)} vnđ
+                                        if(product.quantity !== 0)
+                                            p(style="color:blue") Còn hàng
+                                        else
+                                            p(style="color:blue") Hết hàng
                         else 
                             img.card-img-top.wow.tada(src='/' + product.image, alt='')
                             .card-body

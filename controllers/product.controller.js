@@ -114,6 +114,9 @@ module.exports.viewCart = function(req, res){
         if(product[i].makm === 4){
           var x = product[i].price * total[product[i].id] * 0.5
         }
+        if(product[i].makm !== 1 && product[i].makm !== 2 && product[i].makm !== 3 && product[i].makm !== 4){
+          var x = product[i].price * total[product[i].id]
+        }
         tong += x
       }
       var tongPrice = tong
@@ -149,6 +152,11 @@ module.exports.viewProduct = function(req, res){
 };
 
 module.exports.postViewCart = function(req, res){
+  var sessionId = req.signedCookies.sessionId;
+  var total = db.get('sessions').find({ id: sessionId }).value().cart;
+  if(total !== undefined){
+    db.get('sessions').find({ id: sessionId }).value().cart = {};
+  }
   var hoadon = new Hoadon (req.body);
   hoadon.save((err,data) =>{
     if(err){

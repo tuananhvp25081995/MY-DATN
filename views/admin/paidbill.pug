@@ -74,8 +74,8 @@ block content
           .card-body
           - for(var i = 0; i < hoadons.length; i++)
             - var x = hoadons[i]
-            .table-responsive
-              table#dataTable.table.table-bordered.pb-10(width='100%', cellspacing='0',style="border:4px solid black")
+            .table-responsive.d-flex
+              table#dataTable.table.table-bordered.pb-10(width='100%', cellspacing='0',style="border:4px solid black")               
                 thead(style="background-color: #d0d24e;")
                   tr
                     th(style="color: blue;") Tên Sản Phẩm
@@ -112,9 +112,17 @@ block content
                   tr
                     th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
                       a(href="/admin/paid-bill",style="color: #0e0505") Đã thanh toán
-              br
-              br
-              br
+              .menu-button(style='float:right;margin-left:10px;')
+                .btn-group.dropleft
+                  button.test(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                  .dropdown-menu.dropdown-menu-right(style='padding: 0')
+                    .options-menu
+                      a(href='#',style="text-decoration: none;") T&ugrave;y ch&#x1ECD;n
+                    .options-menu
+                      a(href="/admin/export-excel/" + x.id,style="text-decoration: none;") In b&aacute;o c&aacute;o
+            br
+            br
+            br
           .card-footer.small.text-muted Updated yesterday at 11:59 PM
       footer.sticky-footer
         .container.my-auto

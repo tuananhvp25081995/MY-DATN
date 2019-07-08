@@ -39,9 +39,24 @@ block content
           li.breadcrumb-item.active biểu đồ
         .card.mb-3
           .card-header
-            i.fas.fa-chart-area biểu đồ
+            i.fas.fa-chart-area(style="font-size: 30px;") TOP 5 SẢN PHẨM BÁN CHẠY NHẤT TRONG THÁNG
           .card-body
-            canvas#myAreaChart(width='100%', height='30')
+            .table-responsive
+              table.table.table-bordered(width='100%', cellspacing='0')
+                thead
+                  tr
+                    th(style="color: blue;") Image
+                    th(style="color: blue;") ID Sản phẩm
+                    th(style="color: blue;") Số lượng
+                    th(style="color: blue;") Giá
+                tbody              
+                  - for(var i = 0; i < 5; i++)
+                    tr
+                      td
+                        img(src='/' + imageHoaDons[i], alt="",width="56",height="90")
+                      td #{idHoaDons[i]}
+                      td #{soluongHoaDons[i]}
+                      td #{pageInfo.calculatePrice(priceHoaDons[i])} 
           .card-footer.small.text-muted Updated yesterday at 11:59 PM
         .row
           .col-lg-8

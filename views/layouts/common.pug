@@ -63,7 +63,7 @@ html
 					a(href='http://localhost:3000/auth/login',style="font-size: 13;") Đăng nhập
 				else
 					a(style="font-size: 10;margin-right: 12;color:#9c3718")= user.name
-					a(href='auth/logout',style="font-size: 13;") Đăng xuất
+					a(href='http://localhost:3000/auth/logout',style="font-size: 13;") Đăng xuất
 			.container(style="margin-right: 0;width: 360;padding-top: 10;")
 				form.form-inline.my-2.my-lg-0(action="/products/search",method="GET",class="d-flex")
 					input.form-control.mr-sm-2(type='text', placeholder='Search',name="q", aria-label='Search')

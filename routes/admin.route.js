@@ -46,8 +46,9 @@ uploads.single('image'),
 controller.editProducts);
 
 router.get('/paid-bill/:hoadonId',controller.paidBill);
-
+router.get('/remove-paid-bill/:hoadonId',controller.removeHoaDon);
 router.get('/paid-bill/',controller.paidBills);
+router.get('/export-excel/:idHoaDon',controller.exportExcel);
 router.get('/sale/',controller.saleOff);
 router.get('/sale/create',controller.viewSaleOff);
 router.post('/sale/create',controller.createSaleOff);
