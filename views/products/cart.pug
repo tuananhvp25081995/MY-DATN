@@ -13,7 +13,6 @@ block content
             th(style="color: blue;") Image
             th(style="color: blue;display:none") Image
             th(style="color: blue;") Tên sản phẩm
-            th(style="color: blue;") ID sản phẩm
             th(style="color: blue;") Số lượng
             th(style="color: blue;") Giá
             th(style="color: blue;") Action
@@ -25,7 +24,7 @@ block content
                 input(style="border:none",type='text', name='image[]', value=product.image)
               td
                 input(style="border:none",type='text', name='name[]', value=product.name)
-              td
+              td(style="display:none")
                 input(style="border:none",type='text', name='idSP[]', value=product.id)
               td
                 input(style="border:none",type='text', name='soluong', value=amounts[product.id])
@@ -50,7 +49,19 @@ block content
             th(colspan="6",style="text-align:center;color: blue;") userID:
               input(style="border:none",type='text', name='userid', value=user.id)
           tr
-            th(colspan="6",style="text-align:center;color: blue;") Tổng Giá:
+            th(colspan="6",style="text-align:center;color: blue;") Tổng Giá Chưa được khuyến mãi:  
+              if (status === 0)
+                if(tongPrices >= 5000000)
+                  input(style="border:none",type='text', name='tonggiacu', value=tongPrice)
+                else
+                  input(style="border:none",type='text', name='tonggiacu', value=tongPrice)
+              else
+                if(tongPrices >= 5000000)
+                  input(style="border:none",type='text', name='tonggiacu', value=tongPrice)
+                else
+                  input(style="border:none",type='text', name='tonggiacu', value=tongPrice)
+          tr
+            th(colspan="6",style="text-align:center;color: blue;") Tổng Giá khi được khuyến mãi:  
               if (status === 0)
                 if(tongPrices >= 5000000)
                   input(style="border:none",type='text', name='tonggia', value=tongPrice * (1-10/100))

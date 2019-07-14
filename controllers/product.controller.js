@@ -2,6 +2,7 @@ var Product = require('../models/product.model');
 var Hoadon = require('../models/hoadon.model');
 var Comment = require('../models/comments.model');
 var Message = require('../models/messages.model');
+var User = require('../models/user.model');
 var calculatePrice = require('./priceproduct');
 var db = require('../db');
 var url = require('url');
@@ -211,6 +212,25 @@ module.exports.camNang5 = function(req, res){
 
 module.exports.chitiet =async function(req, res){
   var userId = req.signedCookies.userId
+  if(userId !== undefined){
+    var users = await User.find({_id: userId});
+    var user = users[0];
+    var x = url.parse(req.url).path.split('/')
+    var pathname = x[2];
+    var products = await Product.find({ _id:  pathname});
+    var comments = await Comment.find({});
+    var product =products[0];
+    let pageInfo = {};
+    pageInfo.calculatePrice = calculatePrice;
+    res.render('products/chitiet',{
+      pathname:pathname,
+      product: product,
+      pageInfo,
+      comments,
+      avatar:user.avatar,
+      user,
+    })
+  }
   var x = url.parse(req.url).path.split('/')
   var pathname = x[2];
   var products = await Product.find({ _id:  pathname});
@@ -223,6 +243,8 @@ module.exports.chitiet =async function(req, res){
     product: product,
     pageInfo,
     comments,
+    avatar:'',
+    user,
   })
 }
 

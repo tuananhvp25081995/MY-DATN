@@ -39,7 +39,8 @@ block content
       .container-fluid
         ol.breadcrumb
           li.breadcrumb-item
-          li.breadcrumb(style="font-size:30px;margin:0") Trang chủ
+            a(href='#') Danh mục
+          li.breadcrumb-item.active hóa đơn
         .row
           .col-xl-4.col-sm-6.mb-3
             .card.text-white.bg-primary.o-hidden.h-100
@@ -56,7 +57,7 @@ block content
               .card-body
                 .card-body-icon
                   i.fas.fa-fw.fa-list
-                .mr-5(style="font-size:30px") Tổng số sản phẩm trong kho: #{tongQuantity}
+                .mr-5(style="font-size:30px") Danh mục: 4
               a.card-footer.text-white.clearfix.small.z-1(href='#')
                 span.float-left Chi tiết
                 span.float-right
@@ -73,39 +74,60 @@ block content
                   i.fas.fa-angle-right
         .card.mb-3
           .card-header
-            i.fas.fa-chart-area  Biểu đồ thu nhập trong năm 2018
-          .card-body
-            canvas#myAreaChart(width='100%', height='30')
-          .card-footer.small.text-muted Updated yesterday at 11:59 PM
-        .card.mb-3
-          .card-header
             i.fas.fa-table  Products
           .card-body
             .table-responsive
-              table#dataTable.table.table-bordered(width='100%', cellspacing='0')
-                thead
+            - for(var i = 0; i < hoadons.length; i++)
+              - var x = hoadons[i]
+              table#dataTable.table.table-bordered.pb-10(width='100%', cellspacing='0',style="border:4px solid black")
+                thead(style="background-color: #d0d24e;")
                   tr
-                    th(style="color: blue;") Name
-                    th(style="color: blue;") Image
-                    th(style="color: blue;") Mô tả
-                    th(style="color: blue;") Created_at
-                    th(style="color: blue;") Giá
-                tfoot
-                  tr
-                    th(style="color: blue;") Name
-                    th(style="color: blue;") Image
-                    th(style="color: blue;") Mô tả
-                    th(style="color: blue;") Created_at
+                    th(style="color: blue;") Tên Sản Phẩm
+                    th(style="color: blue;") ID Sản phẩm
+                    th(style="color: blue;") Số lượng
                     th(style="color: blue;") Giá
                 tbody
-                  each product in products
+                  - for(var a = 0; a < x.name.length; a++)
                     tr
-                      td=product.name
-                      td
-                        img(src=product.image, alt="",width="48")
-                      td=product.description
-                      td=product.created_at
-                      td #{pageInfo.calculatePrice(product.price)} vnđ
+                      td(style="color:red")=x.name[a]
+                      td=x.idSP[a]
+                      td=x.soluong[a]
+                      td=pageInfo.calculatePrice(x.price[a])
+                  tr
+                    th(colspan="4",style="text-align:center;color: black;font-size:20px") Tổng giá đơn hàng: #{pageInfo.calculatePrice(x.tonggia)} VND
+                thead(style="background-color: #d0d24e;")
+                  tr
+                    th(style="color: blue;") Tên khách hàng
+                    th(style="color: blue;") Số điện thoại
+                    th(style="color: blue;") Địa chỉ
+                    th(style="color: blue;") Lời nhắn
+                tbody 
+                  tr
+                    td=x.nameUser
+                    td=x.phone
+                    td=x.diachi
+                    td=x.message
+                if(status === 2)
+                  tr
+                    th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
+                      a(href='/admin/paid-bill/' + x.id,style="color: #0e0505") Duyệt hóa đơn
+                  tr
+                    th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
+                      a(href='/admin/remove-paid-bill/' + x.id,style="color: #0e0505") Hủy hóa đơn
+                if(status === 0)
+                  tr
+                    th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
+                      a(href='/admin/giao-hang/' + x.id,style="color: #0e0505") Xác nhận hóa đơn
+                  tr
+                    th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
+                      a(href='/admin/remove-paid-bill/' + x.id,style="color: #0e0505") Hủy hóa đơn
+                if(status === 1)
+                  tr
+                    th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
+                      a(href="/admin/paid-bill",style="color: #0e0505") Đã thanh toán
+              br
+              br
+              br
           .card-footer.small.text-muted Updated yesterday at 11:59 PM
       footer.sticky-footer
         .container.my-auto
@@ -123,7 +145,7 @@ block content
         .modal-body Chọn &quot;Đăng xuất&quot; để đăng xuất
         .modal-footer
           button.btn.btn-secondary(type='button', data-dismiss='modal') Hủy
-          a.btn.btn-primary(href='/admin/logout') Đăng xuất
+          a.btn.btn-primary(href='/admin/login') Đăng xuất
   script(src='/vendor/jquery/jquery.min.js')
   script(src='/vendor/bootstrap/js/bootstrap.bundle.min.js')
   script(src='/vendor/jquery-easing/jquery.easing.min.js')

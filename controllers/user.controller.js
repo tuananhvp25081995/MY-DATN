@@ -20,31 +20,31 @@ module.exports.create = function(req,res){
 }
 
 module.exports.createPost =  function(req,res){
-    req.body.avatar = req.file.path.split('/').slice(1).join('/');
-    req.body.password = md5(req.body.password);
-    let users =  new User (req.body)
-    var errors = [];
-    if(!req.body.name){
-        errors.push('Name is required')
-    }
-    if(!req.body.email){
-        errors.push('email is required')
-    }
+    // req.body.avatar = req.file.path.split('/').slice(1).join('/');
+    // req.body.password = md5(req.body.password);
+    // let users =  new User (req.body)
+    // var errors = [];
+    // if(!req.body.name){
+    //     errors.push('Name is required')
+    // }
+    // if(!req.body.email){
+    //     errors.push('email is required')
+    // }
 
-    if(errors.length){
-        res.render('users/create',{
-            errors: errors,
-            values: req.body
-        });
-        return;
-    }
-    users.save((err,data) =>{
-        if(err){
-            res.send(err);
-        }
-        res.end(data);
-    });
-    res.redirect('/products')
+    // if(errors.length){
+    //     res.render('users/create',{
+    //         errors: errors,
+    //         values: req.body
+    //     });
+    //     return;
+    // }
+    // users.save((err,data) =>{
+    //     if(err){
+    //         res.send(err);
+    //     }
+    //     res.end(data);
+    // });
+    // res.redirect('/products')
 }
 
 module.exports.user = async function(req, res, next){

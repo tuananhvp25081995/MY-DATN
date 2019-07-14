@@ -3,7 +3,7 @@ Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSyste
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Bar Chart Example
-var ctx = document.getElementById("myBarChart");
+var ctx = document.getElementById("myBarChart3");
 var myLineChart = new Chart(ctx, {
   type: 'bar',
   data: {
@@ -12,7 +12,7 @@ var myLineChart = new Chart(ctx, {
       label: "Tổng sản phẩm",
       backgroundColor: "rgba(2,117,216,1)",
       borderColor: "rgba(2,117,216,1)",
-      data: [5, 10, 10, 15, 20, 5,30,6,40,45,4,8,10,23,14,10],
+      data: [9, 23, 41, 12, 53, 23,34,12,9,23,6,23,14,31,12,23],
     }],
   },
   options: {

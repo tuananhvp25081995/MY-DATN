@@ -10,11 +10,15 @@ block content
       li.nav-item
         a.nav-link(href='/admin/charts')
           i.fas.fa-fw.fa-chart-area
-          span Biểu đồ
+          span Thống kê
       li.nav-item
         a.nav-link(href='/admin/hoa-don')
           i.fas.fa-fw.fa-shopping-cart
           span Hóa đơn
+      li.nav-item
+        a.nav-link(href='/admin/giao-hang')
+          i.fas.fa-fw.fa-shopping-cart
+          span Giao hàng
       li.nav-item
         a.nav-link(href='/admin/paid-bill')
           i.fas.fa-fw.fa-shopping-cart
@@ -53,7 +57,7 @@ block content
               .card-body
                 .card-body-icon
                   i.fas.fa-fw.fa-list
-                .mr-5(style="font-size:30px") Danh mục: 4
+                .mr-5(style="font-size:30px") Tổng số sản phẩm trong kho: #{tongQuantity}
               a.card-footer.text-white.clearfix.small.z-1(href='#')
                 span.float-left Chi tiết
                 span.float-right
@@ -106,11 +110,18 @@ block content
                 if(status === 0)
                   tr
                     th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
-                      a(href='/admin/paid-bill/' + x.id,style="color: #0e0505") Xác nhận đơn hàng
+                      a(href='/admin/giao-hang/' + x.id,style="color: #0e0505") Xác nhận đơn hàng
                   tr
                     th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
                       a(href='/admin/remove-paid-bill/' + x.id,style="color: #0e0505") Hủy hóa đơn
-                else
+                if(status === 2)
+                  tr
+                    th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
+                      a(href='/admin/paid-bill/' + x.id,style="color: #0e0505") Duyệt hóa đơn
+                  tr
+                    th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
+                      a(href='/admin/remove-paid-bill/' + x.id,style="color: #0e0505") Hủy hóa đơn
+                if(status === 1)
                   tr
                     th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
                       a(href="/admin/paid-bill",style="color: #0e0505") Đã thanh toán

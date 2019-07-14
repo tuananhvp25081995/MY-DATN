@@ -37,7 +37,7 @@ module.exports.charts = async function(req, res){
   var ngaymuaHoadons = [];
   var imageHoaDonss = [];
   hoadons.forEach( hoadon => {
-    var x = Array.from(hoadon.idSP)
+    var x = Array.from(hoadon.name)
     var y = Array.from(hoadon.soluong)
     var z = Array.from(hoadon.price)
     var t = hoadon.created_at
@@ -92,6 +92,799 @@ module.exports.charts = async function(req, res){
     res.render('admin/hoadonblank')
   }
   res.render('admin/charts',{
+    hoadons : hoadons,
+    idHoaDons:idHoaDons,
+    soluongHoaDons:soluongHoaDons,
+    priceHoaDons,
+    pageInfo,
+    ngaymuaHoadons:ngaymuaHoadons,
+    imageHoaDons:imageHoaDons,
+  });
+};
+
+module.exports.charts2 = async function(req, res){
+  var hoadons = await Hoadon.find({"status": 1});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  var imageHoaDonss = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.name)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    var r = Array.from(hoadon.image)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+    imageHoaDonss.push(r.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var anhHoaDon = imageHoaDonss.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var imageHoaDons = (anhHoaDon.split(","));
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          imageHoaDons[k] = imageHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        imageHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  var n = soluongHoaDons.length
+  for( var  r=1; r<n; r++){
+    for( var s=n-1; s>=r; s--){
+      if( soluongHoaDons[s] > soluongHoaDons[s-1])
+        {
+            var temp = soluongHoaDons[s];
+            soluongHoaDons[s] = soluongHoaDons[s-1];
+            soluongHoaDons[s-1]=temp;
+        }
+      }
+    }    
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
+  res.render('admin/thang2',{
+    hoadons : hoadons,
+    idHoaDons:idHoaDons,
+    soluongHoaDons:soluongHoaDons,
+    priceHoaDons,
+    pageInfo,
+    ngaymuaHoadons:ngaymuaHoadons,
+    imageHoaDons:imageHoaDons,
+  });
+};
+module.exports.charts3 = async function(req, res){
+  var hoadons = await Hoadon.find({"status": 1});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  var imageHoaDonss = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.name)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    var r = Array.from(hoadon.image)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+    imageHoaDonss.push(r.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var anhHoaDon = imageHoaDonss.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var imageHoaDons = (anhHoaDon.split(","));
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          imageHoaDons[k] = imageHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        imageHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  var n = soluongHoaDons.length
+  for( var  r=1; r<n; r++){
+    for( var s=n-1; s>=r; s--){
+      if( soluongHoaDons[s] > soluongHoaDons[s-1])
+        {
+            var temp = soluongHoaDons[s];
+            soluongHoaDons[s] = soluongHoaDons[s-1];
+            soluongHoaDons[s-1]=temp;
+        }
+      }
+    }    
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
+  res.render('admin/thang3',{
+    hoadons : hoadons,
+    idHoaDons:idHoaDons,
+    soluongHoaDons:soluongHoaDons,
+    priceHoaDons,
+    pageInfo,
+    ngaymuaHoadons:ngaymuaHoadons,
+    imageHoaDons:imageHoaDons,
+  });
+};
+module.exports.charts4 = async function(req, res){
+  var hoadons = await Hoadon.find({"status": 1});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  var imageHoaDonss = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.name)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    var r = Array.from(hoadon.image)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+    imageHoaDonss.push(r.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var anhHoaDon = imageHoaDonss.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var imageHoaDons = (anhHoaDon.split(","));
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          imageHoaDons[k] = imageHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        imageHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  var n = soluongHoaDons.length
+  for( var  r=1; r<n; r++){
+    for( var s=n-1; s>=r; s--){
+      if( soluongHoaDons[s] > soluongHoaDons[s-1])
+        {
+            var temp = soluongHoaDons[s];
+            soluongHoaDons[s] = soluongHoaDons[s-1];
+            soluongHoaDons[s-1]=temp;
+        }
+      }
+    }    
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
+  res.render('admin/thang4',{
+    hoadons : hoadons,
+    idHoaDons:idHoaDons,
+    soluongHoaDons:soluongHoaDons,
+    priceHoaDons,
+    pageInfo,
+    ngaymuaHoadons:ngaymuaHoadons,
+    imageHoaDons:imageHoaDons,
+  });
+};
+module.exports.charts5 = async function(req, res){
+  var hoadons = await Hoadon.find({"status": 1});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  var imageHoaDonss = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.name)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    var r = Array.from(hoadon.image)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+    imageHoaDonss.push(r.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var anhHoaDon = imageHoaDonss.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var imageHoaDons = (anhHoaDon.split(","));
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          imageHoaDons[k] = imageHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        imageHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  var n = soluongHoaDons.length
+  for( var  r=1; r<n; r++){
+    for( var s=n-1; s>=r; s--){
+      if( soluongHoaDons[s] > soluongHoaDons[s-1])
+        {
+            var temp = soluongHoaDons[s];
+            soluongHoaDons[s] = soluongHoaDons[s-1];
+            soluongHoaDons[s-1]=temp;
+        }
+      }
+    }    
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
+  res.render('admin/thang5',{
+    hoadons : hoadons,
+    idHoaDons:idHoaDons,
+    soluongHoaDons:soluongHoaDons,
+    priceHoaDons,
+    pageInfo,
+    ngaymuaHoadons:ngaymuaHoadons,
+    imageHoaDons:imageHoaDons,
+  });
+};
+module.exports.charts6 = async function(req, res){
+  var hoadons = await Hoadon.find({"status": 1});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  var imageHoaDonss = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.name)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    var r = Array.from(hoadon.image)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+    imageHoaDonss.push(r.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var anhHoaDon = imageHoaDonss.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var imageHoaDons = (anhHoaDon.split(","));
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          imageHoaDons[k] = imageHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        imageHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  var n = soluongHoaDons.length
+  for( var  r=1; r<n; r++){
+    for( var s=n-1; s>=r; s--){
+      if( soluongHoaDons[s] > soluongHoaDons[s-1])
+        {
+            var temp = soluongHoaDons[s];
+            soluongHoaDons[s] = soluongHoaDons[s-1];
+            soluongHoaDons[s-1]=temp;
+        }
+      }
+    }    
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
+  res.render('admin/thang6',{
+    hoadons : hoadons,
+    idHoaDons:idHoaDons,
+    soluongHoaDons:soluongHoaDons,
+    priceHoaDons,
+    pageInfo,
+    ngaymuaHoadons:ngaymuaHoadons,
+    imageHoaDons:imageHoaDons,
+  });
+};
+module.exports.charts7 = async function(req, res){
+  var hoadons = await Hoadon.find({"status": 1});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  var imageHoaDonss = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.name)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    var r = Array.from(hoadon.image)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+    imageHoaDonss.push(r.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var anhHoaDon = imageHoaDonss.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var imageHoaDons = (anhHoaDon.split(","));
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          imageHoaDons[k] = imageHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        imageHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  var n = soluongHoaDons.length
+  for( var  r=1; r<n; r++){
+    for( var s=n-1; s>=r; s--){
+      if( soluongHoaDons[s] > soluongHoaDons[s-1])
+        {
+            var temp = soluongHoaDons[s];
+            soluongHoaDons[s] = soluongHoaDons[s-1];
+            soluongHoaDons[s-1]=temp;
+        }
+      }
+    }    
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
+  res.render('admin/thang7',{
+    hoadons : hoadons,
+    idHoaDons:idHoaDons,
+    soluongHoaDons:soluongHoaDons,
+    priceHoaDons,
+    pageInfo,
+    ngaymuaHoadons:ngaymuaHoadons,
+    imageHoaDons:imageHoaDons,
+  });
+};
+module.exports.charts8 = async function(req, res){
+  var hoadons = await Hoadon.find({"status": 1});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  var imageHoaDonss = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.name)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    var r = Array.from(hoadon.image)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+    imageHoaDonss.push(r.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var anhHoaDon = imageHoaDonss.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var imageHoaDons = (anhHoaDon.split(","));
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          imageHoaDons[k] = imageHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        imageHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  var n = soluongHoaDons.length
+  for( var  r=1; r<n; r++){
+    for( var s=n-1; s>=r; s--){
+      if( soluongHoaDons[s] > soluongHoaDons[s-1])
+        {
+            var temp = soluongHoaDons[s];
+            soluongHoaDons[s] = soluongHoaDons[s-1];
+            soluongHoaDons[s-1]=temp;
+        }
+      }
+    }    
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
+  res.render('admin/thang8',{
+    hoadons : hoadons,
+    idHoaDons:idHoaDons,
+    soluongHoaDons:soluongHoaDons,
+    priceHoaDons,
+    pageInfo,
+    ngaymuaHoadons:ngaymuaHoadons,
+    imageHoaDons:imageHoaDons,
+  });
+};
+module.exports.charts9 = async function(req, res){
+  var hoadons = await Hoadon.find({"status": 1});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  var imageHoaDonss = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.name)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    var r = Array.from(hoadon.image)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+    imageHoaDonss.push(r.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var anhHoaDon = imageHoaDonss.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var imageHoaDons = (anhHoaDon.split(","));
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          imageHoaDons[k] = imageHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        imageHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  var n = soluongHoaDons.length
+  for( var  r=1; r<n; r++){
+    for( var s=n-1; s>=r; s--){
+      if( soluongHoaDons[s] > soluongHoaDons[s-1])
+        {
+            var temp = soluongHoaDons[s];
+            soluongHoaDons[s] = soluongHoaDons[s-1];
+            soluongHoaDons[s-1]=temp;
+        }
+      }
+    }    
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
+  res.render('admin/thang9',{
+    hoadons : hoadons,
+    idHoaDons:idHoaDons,
+    soluongHoaDons:soluongHoaDons,
+    priceHoaDons,
+    pageInfo,
+    ngaymuaHoadons:ngaymuaHoadons,
+    imageHoaDons:imageHoaDons,
+  });
+};
+module.exports.charts10 = async function(req, res){
+  var hoadons = await Hoadon.find({"status": 1});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  var imageHoaDonss = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.name)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    var r = Array.from(hoadon.image)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+    imageHoaDonss.push(r.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var anhHoaDon = imageHoaDonss.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var imageHoaDons = (anhHoaDon.split(","));
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          imageHoaDons[k] = imageHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        imageHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  var n = soluongHoaDons.length
+  for( var  r=1; r<n; r++){
+    for( var s=n-1; s>=r; s--){
+      if( soluongHoaDons[s] > soluongHoaDons[s-1])
+        {
+            var temp = soluongHoaDons[s];
+            soluongHoaDons[s] = soluongHoaDons[s-1];
+            soluongHoaDons[s-1]=temp;
+        }
+      }
+    }    
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
+  res.render('admin/thang10',{
+    hoadons : hoadons,
+    idHoaDons:idHoaDons,
+    soluongHoaDons:soluongHoaDons,
+    priceHoaDons,
+    pageInfo,
+    ngaymuaHoadons:ngaymuaHoadons,
+    imageHoaDons:imageHoaDons,
+  });
+};
+module.exports.charts11 = async function(req, res){
+  var hoadons = await Hoadon.find({"status": 1});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  var imageHoaDonss = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.name)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    var r = Array.from(hoadon.image)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+    imageHoaDonss.push(r.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var anhHoaDon = imageHoaDonss.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var imageHoaDons = (anhHoaDon.split(","));
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          imageHoaDons[k] = imageHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        imageHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  var n = soluongHoaDons.length
+  for( var  r=1; r<n; r++){
+    for( var s=n-1; s>=r; s--){
+      if( soluongHoaDons[s] > soluongHoaDons[s-1])
+        {
+            var temp = soluongHoaDons[s];
+            soluongHoaDons[s] = soluongHoaDons[s-1];
+            soluongHoaDons[s-1]=temp;
+        }
+      }
+    }    
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
+  res.render('admin/thang11',{
+    hoadons : hoadons,
+    idHoaDons:idHoaDons,
+    soluongHoaDons:soluongHoaDons,
+    priceHoaDons,
+    pageInfo,
+    ngaymuaHoadons:ngaymuaHoadons,
+    imageHoaDons:imageHoaDons,
+  });
+};
+module.exports.charts12 = async function(req, res){
+  var hoadons = await Hoadon.find({"status": 1});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  var imageHoaDonss = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.name)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    var r = Array.from(hoadon.image)
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+    imageHoaDonss.push(r.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var anhHoaDon = imageHoaDonss.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var imageHoaDons = (anhHoaDon.split(","));
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          imageHoaDons[k] = imageHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        imageHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  var n = soluongHoaDons.length
+  for( var  r=1; r<n; r++){
+    for( var s=n-1; s>=r; s--){
+      if( soluongHoaDons[s] > soluongHoaDons[s-1])
+        {
+            var temp = soluongHoaDons[s];
+            soluongHoaDons[s] = soluongHoaDons[s-1];
+            soluongHoaDons[s-1]=temp;
+        }
+      }
+    }    
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
+  res.render('admin/thang12',{
     hoadons : hoadons,
     idHoaDons:idHoaDons,
     soluongHoaDons:soluongHoaDons,
@@ -233,12 +1026,113 @@ module.exports.hoadon = async function(req, res){
   });
 }
 
+module.exports.duyetHoaDons = async function(req, res){
+  var hoadons = await Hoadon.find({"status": 2});
+  let pageInfo = {};
+  pageInfo.calculatePrice = calculatePrice;
+  if(hoadons[0] === undefined){
+    res.render('admin/hoadonblank')
+  }
+  var status = hoadons[0].status
+  res.render('admin/giaohang',{
+    hoadons : hoadons,
+    status: status,
+    pageInfo,
+  });
+}
+
+module.exports.duyetHoaDon = async function(req, res){
+  var hoadonId = req.params.hoadonId;
+  var paidBills = await Hoadon.find({_id: hoadonId});
+  var idUser = paidBills[0].userid
+  Hoadon.findOneAndUpdate({_id: hoadonId}, {$set:{status:2,thanhcong:1}}, {new: true}, (err, doc) => {
+    if (err) {
+        console.log("Something wrong when updating data!");
+    }
+  });
+  var hoadons = await Hoadon.find({ $and:[{"status": 2},{userid:idUser}]});
+  var arrayHoadon = [];
+  var arrayHoadons = [];
+  var giaHoadons = [];
+  var ngaymuaHoadons = [];
+  hoadons.forEach( hoadon => {
+    var x = Array.from(hoadon.idSP)
+    var y = Array.from(hoadon.soluong)
+    var z = Array.from(hoadon.price)
+    var t = hoadon.created_at
+    arrayHoadon.push(x.toString());
+    arrayHoadons.push(y.toString());
+    giaHoadons.push(z.toString());
+    ngaymuaHoadons.push(t.toString());
+  })
+  var idHoaDon = arrayHoadon.toString();
+  var soluongHoaDon = arrayHoadons.toString();
+  var giaHoadon = giaHoadons.toString();
+  var idHoaDons = (idHoaDon.split(","));
+  var soluongHoaDons = (soluongHoaDon.split(","));
+  var priceHoaDons = (giaHoadon.split(","));
+  var tong = 0;
+  for(var i = 0; i < idHoaDons.length -1; i++){
+    for(var j = i + 1; j < idHoaDons.length; j++){
+      if(idHoaDons[i] === idHoaDons[j]){
+        for (k = j; k < idHoaDons.length; k++){
+          idHoaDons[k] = idHoaDons[k+1];
+          priceHoaDons[k] = priceHoaDons[k+1];
+          if(k===j){
+            soluongHoaDons[i] = parseInt(soluongHoaDons[i]) + parseInt(soluongHoaDons[j]);
+          }
+          soluongHoaDons[k] = soluongHoaDons[k+1]
+				}
+        idHoaDons.length--;
+        soluongHoaDons.length--;
+        i--;
+      }
+    }
+  }
+  for(var y = 0 ; y < idHoaDons.length; y++){
+    var u = priceHoaDons[y] * soluongHoaDons[y]
+    tong += u
+  }
+  var tongPrice = tong
+  var products = await Product.find({});
+  var idSP = paidBills[0].idSP;
+  var soluong = paidBills[0].soluong;
+  for(var i = 0; i < idSP.length; i++){
+    var products = await Product.find({_id:idSP[i]});
+    var quantity = products[0].quantity
+    var quantitys = soluong[i]
+    if(quantity - quantitys >= 0){
+      Product.findOneAndUpdate({_id:idSP[i]}, {$set:{quantity:quantity-quantitys}}, {new: true}, (err, doc) => {
+        if (err) {
+          console.log("Something wrong when updating data!");
+        }
+      });
+    }
+    else{
+      console.log("het hang")
+    }
+  }
+
+  User.findOneAndUpdate({_id:idUser}, {$set:{tongsotien:tongPrice}}, {new: true}, (err, doc) => {
+    if (err) {
+      console.log("Something wrong when updating data!");
+    }
+  })
+
+  res.redirect('/admin/hoa-don')
+}
+
 module.exports.removeHoaDon = async function(req, res){
   var hoadonId = req.params.hoadonId
   Hoadon.deleteOne({ _id: hoadonId }, function (err) {
     if (err) return handleError(err);
   });
-  res.redirect('/admin/hoa-don');
+  Hoadon.findOneAndUpdate({_id: hoadonId}, {$set:{thanhcong:2}}, {new: true}, (err, doc) => {
+    if (err) {
+        console.log("Something wrong when updating data!");
+    }
+  });
+  res.redirect('/admin/giao-hang');
 }
 
 module.exports.paidBill = async function(req, res){
@@ -319,7 +1213,7 @@ module.exports.paidBill = async function(req, res){
     }
   })
 
-  res.redirect('/admin/hoa-don')
+  res.redirect('/admin/giao-hang')
 }
 
 module.exports.paidBills = async function(req, res){
@@ -336,6 +1230,19 @@ module.exports.paidBills = async function(req, res){
     status: status,
     pageInfo,
   });
+}
+
+module.exports.removepaidBills = async function(req, res){
+  var hoadonId = req.params.hoadonId
+  Hoadon.deleteOne({ _id: hoadonId }, function (err) {
+    if (err) return handleError(err);
+  });
+  Hoadon.findOneAndUpdate({_id: hoadonId}, {$set:{thanhcong:2}}, {new: true}, (err, doc) => {
+    if (err) {
+        console.log("Something wrong when updating data!");
+    }
+  });
+  res.redirect('/admin/paid-bill');
 }
 
 module.exports.exportExcel = async function(req, res){
@@ -742,7 +1649,6 @@ module.exports.viewUser = async function(req, res){
     tong += u
   }
   var tongPrice = tong
-  console.log(tongPrice)
   let pageInfo = {};
   pageInfo.calculatePrice = calculatePrice;
   var users = await User.find({_id:id});

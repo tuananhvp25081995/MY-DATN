@@ -5,6 +5,7 @@ var hoadonSchema = new mongoose.Schema({
   name:[String],
   nameUser: String,
   tonggia: Number,
+  tonggiacu:Number,
   status: Number | 0,
   phone: String,
   diachi: String,
@@ -12,6 +13,7 @@ var hoadonSchema = new mongoose.Schema({
   soluong:[Number],
   image: [String],
   userid : String,
+  thanhcong:{ type: Number, default: 0 },
   price:[String],
   created_at: { type: Date, default: Date.now },
   status: { type: Number, default: 0 }

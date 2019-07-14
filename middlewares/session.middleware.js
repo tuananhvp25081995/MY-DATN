@@ -20,6 +20,21 @@ module.exports =async function (req, res, next) {
       id: sessionId
     }).write();
   }
+  var quantityProduct = await Product.find({});
+  var tongQuantity = 0;
+  for(var t = 0 ; t < quantityProduct.length ; t++){
+    tongQuantity = tongQuantity + quantityProduct[t].quantity
+  }
+  res.locals.tongQuantity = tongQuantity;
+  var user = await User.find({_id: req.signedCookies.userId});
+  res.locals.user = user[0];
+  if(user[0] !== undefined){
+    var thongbaoSchemas = await Hoadon.find({ $and:[{"status": 1},{userid:user[0].id}]});
+    var thongbaoSchema = thongbaoSchemas[0];
+    var thanhcong = thongbaoSchema.thanhcong
+    res.locals.thanhcong = thanhcong;
+  }
+  res.locals.thanhcong = 1;
   var dateNow = new Date().getTime();
   var saleoffs = await Saleoff.find({});
   var startSales = saleoffs[0].startday
@@ -42,13 +57,10 @@ module.exports =async function (req, res, next) {
   res.locals.status = status;
   res.locals.endSale = endSale;
   res.locals.dateSale = dateSale;
-  var user = await User.find({_id: req.signedCookies.userId});
-  res.locals.user = user[0];
   var admin = await Admin.find({_id: req.signedCookies.adminId});
   res.locals.admin = admin[0];
   var countProduct = await Product.count();
   res.locals.totalProduct = countProduct
-
   var hoadons = await Hoadon.count({status: 0});
   res.locals.hoadon = hoadons
   var messages = await Message.find({});

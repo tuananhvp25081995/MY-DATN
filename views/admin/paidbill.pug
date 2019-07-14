@@ -10,11 +10,15 @@ block content
       li.nav-item
         a.nav-link(href='/admin/charts')
           i.fas.fa-fw.fa-chart-area
-          span Biểu đồ
+          span Thống kê
       li.nav-item
         a.nav-link(href='/admin/hoa-don')
           i.fas.fa-fw.fa-shopping-cart
           span Hóa đơn
+      li.nav-item
+        a.nav-link(href='/admin/giao-hang')
+          i.fas.fa-fw.fa-shopping-cart
+          span Giao hàng
       li.nav-item
         a.nav-link(href='/admin/paid-bill')
           i.fas.fa-fw.fa-shopping-cart
@@ -53,7 +57,7 @@ block content
               .card-body
                 .card-body-icon
                   i.fas.fa-fw.fa-list
-                .mr-5(style="font-size:30px") Danh mục: 4
+                .mr-5(style="font-size:30px") Tổng số sản phẩm trong kho: #{tongQuantity}
               a.card-footer.text-white.clearfix.small.z-1(href='#')
                 span.float-left Chi tiết
                 span.float-right
@@ -107,11 +111,18 @@ block content
                 if(status === 0)
                   tr
                     th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
-                      a(href="/admin/paid-bill",style="color: #0e0505") Xác nhận đơn hàng
-                else
+                      a(href="/admin/giao-hang",style="color: #0e0505") Xác nhận đơn hàng
+                if(status === 1)
                   tr
                     th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
                       a(href="/admin/paid-bill",style="color: #0e0505") Đã thanh toán
+                  tr
+                    th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
+                      a(href="/admin/delete-paid-bill/" + x.id,style="color: #0e0505") Delete
+                if(status === 2)
+                  tr
+                    th.xacnhan(colspan="4",style="text-align:center;background-color: #0058b3;")
+                      a(href="/admin/paid-bill",style="color: #0e0505") Duyệt hóa đơn
               .menu-button(style='float:right;margin-left:10px;')
                 .btn-group.dropleft
                   button.test(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')

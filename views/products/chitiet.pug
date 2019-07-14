@@ -155,7 +155,7 @@ block content
                 a(href='https://twitter.com/intent/tweet?url=http://giamtieucau.com/thuc-pham-chuc-nang-bloodwell/combo-5-thuc-pham-chuc-nang-bloodwell.html', target='_blank', title='Twitter')
                   img(alt='Twitter', src='/images/twitter_32.png')
         .container-sub-div
-          h3.title-h3 B&igrave;nh lu&#x1EAD;n (0)
+          h3.title-h3 B&igrave;nh lu&#x1EAD;n (#{comments.length})
           .ct-div-subs
             div(style='margin-bottom:10px; font-size:15px;')
         p(style='text-align: justify;')
@@ -164,8 +164,8 @@ block content
               b &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Gửi bình luận của bạn
               
         each comment in comments
-          img.img2(src='/'+ user.avatar, alt="",width="32")
-          span(style="font-weight:bold")   #{comment.message}
+          img.img2(src='/' + comment.userId, alt="",width="32")
+          span(style="font-weight:bold")  #{comment.message}
           br
           br
         p(style='text-align: justify;')
@@ -173,6 +173,8 @@ block content
           .form-group
             label Gửi bình luận của bạn
             textarea#exampleInputMessage.form-control(tyle="text",name='message',style="height: 180;")
+          .form-group(style="display:none")
+            input(type='text', name='userId', value=avatar)
           .form-check
           button.btn.btn-success(type='submit') Comments
               #load-comments
